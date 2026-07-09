@@ -21,6 +21,10 @@ const checks = [
   { path: "/img_MSMS/177_Serotonin.png", status: 200, contentType: "image/" },
   { path: "/pdf/177_Serotonin_4-31.pdf", status: 200, contentType: "application/pdf" },
   { path: "/calc/", status: 301, location: "/calc" },
+  { path: "/alkaloids/not-a-real-subclass", status: 404 },
+  { path: "/small-compounds/not-a-real-subclass", status: 404 },
+  { path: "/categories/2-4-oh2-phacasn34", status: 301, location: "/search?term=2-4-OH2-PhAcAsn34" },
+  { path: "/categories/2-4-oh2-phacasn34/page/1", status: 301, location: "/search?term=2-4-OH2-PhAcAsn34" },
 ];
 
 for (const check of checks) {
@@ -28,6 +32,7 @@ for (const check of checks) {
 }
 
 await assertPostCalc();
+await assertLegacySearch();
 
 console.log(`Smoke checks passed against ${baseUrl}`);
 
@@ -78,6 +83,13 @@ async function assertPostCalc() {
   assert(response.status === 200, `/calc POST returned ${response.status}`);
   assert(text.includes("Prop3334Gu"), "/calc POST did not include Prop3334Gu");
   assert((response.headers.get("cache-control") || "").includes("no-store"), "/calc POST is missing no-store cache header");
+}
+
+async function assertLegacySearch() {
+  const response = await fetch(`${baseUrl}/categories/2-4-oh2-phacasn34`);
+  const text = await response.text();
+  assert(response.status === 200, `legacy taxonomy redirect returned ${response.status}`);
+  assert(text.includes("2,4-(OH)₂-PhAcAsn34"), "legacy taxonomy search did not include the matching compound");
 }
 
 function assert(condition, message) {

@@ -1,15 +1,20 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { normalizeTermKey } from "./lib/terms.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const contentIndexPath = path.join(root, "public", "data", "content-index.json");
+const legacyTaxonomyPath = path.join(root, "data", "legacy-taxonomy.json");
 const outputFile = path.join(root, "public", "data", "redirects.json");
 const generatedFile = path.join(root, ".generated", "redirects.json");
 
 const { pages } = JSON.parse(await readFile(contentIndexPath, "utf8"));
-const slugs = new Set(pages.map((page) => page.slug));
+const { routes: legacyTaxonomyRoutes } = JSON.parse(await readFile(legacyTaxonomyPath, "utf8"));
+const termsByType = {
+  categories: new Set(pages.flatMap((page) => page.categories).map(normalizeTermKey)),
+  tags: new Set(pages.flatMap((page) => page.tags).map(normalizeTermKey)),
+};
 const redirects = {};
 
 for (const page of pages) {
@@ -18,16 +23,12 @@ for (const page of pages) {
   }
 }
 
-for (const oldPath of listOldHtmlPaths()) {
-  const clean = oldPath.replace(/\/index\.html$/, "").replace(/\/page\/\d+$/, "");
-  if (!clean || slugs.has(clean)) {
-    continue;
+for (const [oldPath, term] of Object.entries(legacyTaxonomyRoutes)) {
+  const type = oldPath.split("/")[1];
+  if (!termsByType[type]?.has(normalizeTermKey(term))) {
+    throw new Error(`Legacy taxonomy redirect ${oldPath} has no current ${type} term for ${term}`);
   }
-  if (clean.startsWith("categories/")) {
-    redirects[`/${clean}`] = `/search?term=${encodeURIComponent(clean.split("/").at(-1) || "")}`;
-  } else if (clean.startsWith("tags/")) {
-    redirects[`/${clean}`] = `/search?term=${encodeURIComponent(clean.split("/").at(-1) || "")}`;
-  }
+  redirects[oldPath] = `/search?term=${encodeURIComponent(term)}`;
 }
 
 redirects["/calc/"] = "/calc";
@@ -38,17 +39,3 @@ await writeFile(outputFile, `${JSON.stringify({ generatedAt: new Date().toISOStr
 await writeFile(generatedFile, `${JSON.stringify({ generatedAt: new Date().toISOString(), redirects }, null, 2)}\n`, "utf8");
 
 console.log(`Generated ${Object.keys(redirects).length} redirects`);
-
-function listOldHtmlPaths() {
-  try {
-    return execFileSync("git", ["ls-tree", "-r", "--name-only", "origin/gh-pages"], {
-      cwd: root,
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "ignore"],
-    })
-      .split("\n")
-      .filter((line) => line.endsWith("/index.html"));
-  } catch {
-    return [];
-  }
-}

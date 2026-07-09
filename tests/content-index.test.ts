@@ -1,6 +1,8 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, test } from "vitest";
+import { findRedirect } from "../src/index";
+import { normalizeTermKey } from "../src/search";
 import type { ContentIndex, RedirectIndex } from "../src/types";
 
 const root = new URL("..", import.meta.url);
@@ -28,7 +30,17 @@ describe("generated content index", () => {
 
   test("generates redirects for fallback and legacy paths", () => {
     const redirects = JSON.parse(readFileSync(new URL("../public/data/redirects.json", import.meta.url), "utf8")) as RedirectIndex;
+    const index = JSON.parse(readFileSync(new URL("../public/data/content-index.json", import.meta.url), "utf8")) as ContentIndex;
+    const legacy = JSON.parse(readFileSync(new URL("../data/legacy-taxonomy.json", import.meta.url), "utf8")) as { routes: Record<string, string> };
+    const termKeys = new Set(index.pages.flatMap((page) => [...page.categories, ...page.tags]).map(normalizeTermKey));
+
     expect(redirects.redirects["/calc/"]).toBe("/calc");
-    expect(Object.keys(redirects.redirects).length).toBeGreaterThan(0);
+    expect(Object.keys(legacy.routes).length).toBeGreaterThan(4_000);
+    expect(redirects.redirects["/categories/2-4-oh2-phacasn34"]).toBe("/search?term=2-4-OH2-PhAcAsn34");
+    expect(redirects.redirects["/categories/2-4-oh2-phacasn34/page/1"]).toBe("/search?term=2-4-OH2-PhAcAsn34");
+    expect(Object.values(legacy.routes).every((term) => termKeys.has(normalizeTermKey(term)))).toBe(true);
+
+    const unicodePath = "/categories/24-oh2-phacasn433ßala4";
+    expect(findRedirect(redirects.redirects, encodeURI(unicodePath))).toBe(redirects.redirects[unicodePath]);
   });
 });

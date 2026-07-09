@@ -2,23 +2,28 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { normalizeTermKey } from "./lib/terms.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const indexPath = path.join(root, "public", "data", "content-index.json");
 const outputDir = path.join(root, ".generated");
 const seedFile = path.join(outputDir, "search-seed.sql");
 const versionFile = path.join(outputDir, "search-version.txt");
+const SEARCH_SCHEMA_VERSION = 2;
 
 const { pages } = JSON.parse(await readFile(indexPath, "utf8"));
 const ordered = [...pages].sort((a, b) => a.slug.localeCompare(b.slug));
 
 // Content hash — stable across runs (no timestamps), independent of table names.
 // Covers every field that lands in the search tables, so distinct content ⇒ distinct version.
-const canonical = JSON.stringify(ordered.map((page) => [
-  page.slug, page.title, page.kind, page.sourcePath, page.description, page.formula,
-  page.nominalMass, page.precursor1, page.family, page.species, page.level, page.confidence,
-  page.categories, page.tags, page.bodyText,
-]));
+const canonical = JSON.stringify({
+  schema: SEARCH_SCHEMA_VERSION,
+  pages: ordered.map((page) => [
+    page.slug, page.title, page.kind, page.sourcePath, page.description, page.formula,
+    page.nominalMass, page.precursor1, page.family, page.species, page.level, page.confidence,
+    page.categories, page.tags, page.bodyText,
+  ]),
+});
 const version = createHash("sha256").update(canonical).digest("hex").slice(0, 12);
 
 const P = `pages_${version}`;
@@ -48,9 +53,10 @@ const ddl = [
   `CREATE TABLE ${T} (
     page_slug TEXT NOT NULL,
     term_type TEXT NOT NULL,
-    term_value TEXT NOT NULL
+    term_value TEXT NOT NULL,
+    term_key TEXT NOT NULL
   );`,
-  `CREATE INDEX idx_${T}_type_value ON ${T}(term_type, term_value);`,
+  `CREATE INDEX idx_${T}_type_key ON ${T}(term_type, term_key);`,
   `CREATE INDEX idx_${T}_slug ON ${T}(page_slug);`,
   `CREATE VIRTUAL TABLE ${F} USING fts5(
     slug UNINDEXED, title, body, formula, categories, tags, families, species,
@@ -89,7 +95,7 @@ function pageToSql(page) {
   ].filter(Boolean);
 
   for (const [type, value] of terms) {
-    rows.push(`INSERT INTO ${T} (page_slug, term_type, term_value) VALUES (${sqlString(page.slug)}, ${sqlString(type)}, ${sqlString(value)});`);
+    rows.push(`INSERT INTO ${T} (page_slug, term_type, term_value, term_key) VALUES (${sqlString(page.slug)}, ${sqlString(type)}, ${sqlString(value)}, ${sqlString(normalizeTermKey(value))});`);
   }
 
   return rows;

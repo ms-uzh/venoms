@@ -193,13 +193,13 @@ export function sectionBrowsePage(pages: PageIndexEntry[], base: string): string
   </section>`;
 }
 
-export function subclassBrowsePage(pages: PageIndexEntry[], top: string, subSlug: string, sectionTitle: string, sectionBase: string): string {
+export function subclassBrowsePage(pages: PageIndexEntry[], top: string, subSlug: string, sectionTitle: string, sectionBase: string): string | null {
   const prefix = `${top}/${subSlug}/`;
   const compounds = pages
     .filter((page) => page.kind === "compound" && page.slug.startsWith(prefix))
     .sort((a, b) => (a.precursor1 || a.nominalMass || 0) - (b.precursor1 || b.nominalMass || 0));
   if (compounds.length === 0) {
-    return `<section class="content"><h1>Not found</h1></section>`;
+    return null;
   }
   const label = subclassLabel(compounds[0].sourcePath, subSlug);
 
@@ -416,7 +416,7 @@ export function searchPage(params: SearchParams, results: SearchResult[], facets
 
   const resultRows = results.map((result) => searchResultRow(result)).join("");
   const activeChips = activeFilterChips(params);
-  const hasFilters = FACET_TYPES.some((type) => params[type].length) || params.mz !== null;
+  const hasFilters = Boolean(params.term) || FACET_TYPES.some((type) => params[type].length) || params.mz !== null;
 
   return `<section class="content">
     <div class="eyebrow">Search &amp; filter</div>
@@ -485,6 +485,9 @@ function facetGroup(label: string, type: (typeof FACET_TYPES)[number], facets: S
 
 function activeFilterChips(params: SearchParams): string {
   const chips: string[] = [];
+  if (params.term) {
+    chips.push(`<a class="af" href="${escapeHtml(searchUrl(params, (sp) => sp.delete("term")))}">${escapeHtml(params.term)} &times;</a>`);
+  }
   for (const type of FACET_TYPES) {
     for (const value of params[type]) {
       chips.push(`<a class="af" href="${escapeHtml(toggleUrl(params, type, value))}">${escapeHtml(value)} &times;</a>`);
@@ -514,6 +517,7 @@ function sortLinks(params: SearchParams): string {
 function searchUrl(params: SearchParams, mutate: (sp: URLSearchParams) => void): string {
   const sp = new URLSearchParams();
   if (params.q) sp.set("q", params.q);
+  if (params.term) sp.set("term", params.term);
   for (const type of FACET_TYPES) {
     for (const value of params[type]) sp.append(type, value);
   }
@@ -536,6 +540,7 @@ function toggleUrl(params: SearchParams, type: (typeof FACET_TYPES)[number], val
 function hiddenParams(params: SearchParams, exclude: string[]): string {
   const inputs: string[] = [];
   if (!exclude.includes("q") && params.q) inputs.push(hidden("q", params.q));
+  if (!exclude.includes("term") && params.term) inputs.push(hidden("term", params.term));
   for (const type of FACET_TYPES) {
     if (exclude.includes(type)) continue;
     for (const value of params[type]) inputs.push(hidden(type, value));

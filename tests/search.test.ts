@@ -1,5 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { fallbackSearch, searchParams } from "../src/index";
+import { searchPage } from "../src/html";
+import { normalizeTermKey } from "../src/search";
 import type { ContentIndex, PageIndexEntry } from "../src/types";
 
 function page(overrides: Partial<PageIndexEntry>): PageIndexEntry {
@@ -13,7 +15,7 @@ function page(overrides: Partial<PageIndexEntry>): PageIndexEntry {
 const index: ContentIndex = {
   generatedAt: "test",
   pages: [
-    page({ slug: "a", title: "PhAcAsn3(Me)43", precursor1: 481.31329, family: ["Araneidae"], level: "S-3" }),
+    page({ slug: "a", title: "PhAcAsn3(Me)43", precursor1: 481.31329, family: ["Araneidae"], level: "S-3", categories: ["2-4-OH2-PhAcAsn3(Me)43"] }),
     page({ slug: "b", title: "PhAcAsn353", precursor1: 481.31329, family: ["Araneidae"], level: "S-3" }),
     page({ slug: "c", title: "Arginine", precursor1: 175.11895, family: ["Lycosidae"], level: "S-1" }),
     page({ slug: "d", title: "Guanosine", precursor1: 284.09879, family: ["Agelenidae"], level: "S-2" }),
@@ -50,5 +52,21 @@ describe("fallbackSearch", () => {
   test("sorts by mass ascending", () => {
     const results = fallbackSearch(index, searchParams("https://x/search?sort=mass"));
     expect(results.map((r) => r.slug)).toEqual(["c", "d", "a", "b"]);
+  });
+
+  test("normalizes legacy taxonomy notation", () => {
+    expect(normalizeTermKey("2,4-(OH)₂-PhAcAsn3(Me)43")).toBe(normalizeTermKey("2-4-OH2-PhAcAsn3(Me)43"));
+    const results = fallbackSearch(index, searchParams("https://x/search?term=2%2C4-%28OH%29%E2%82%82-PhAcAsn3%28Me%2943"));
+    expect(results.map((result) => result.slug)).toEqual(["a"]);
+  });
+});
+
+describe("searchPage", () => {
+  test("preserves a legacy term in sort links and forms", () => {
+    const params = searchParams("https://x/search?term=3");
+    const html = searchPage(params, [], []);
+    expect(html).toContain("/search?term=3&amp;sort=mass");
+    expect(html).toContain('name="term" value="3"');
+    expect(html).toContain('href="/search"');
   });
 });

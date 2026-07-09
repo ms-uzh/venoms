@@ -5,7 +5,7 @@ import { fetchTextAsset, loadCalcConfig, loadContentIndex, loadRedirectIndex } f
 import { calculate, defaultInput, inputFromForm } from "./calc/calculate";
 import { canonicalPath, parseCompoundRecord, parseMarkdownDocument } from "./content";
 import { calcPage, compoundJsonLd, compoundPage, guidePage, homePage, layout, llmsTxt, searchPage, sectionBrowsePage, sitemapXml, subclassBrowsePage, websiteJsonLd, type SearchFacet, type SearchResult } from "./html";
-import { loadFacets, searchPages, type SearchParams } from "./search";
+import { loadFacets, normalizeTermKey, searchPages, type SearchParams } from "./search";
 import type { ContentIndex, PageIndexEntry } from "./types";
 
 type Bindings = {
@@ -69,7 +69,7 @@ app.get("/search", async (c) => {
     facets = fallbackFacets(index);
   }
 
-  const filtered = params.q || params.mz !== null || params.family.length || params.species.length || params.formula.length || params.level.length || params.confidence.length;
+  const filtered = params.q || params.term || params.mz !== null || params.family.length || params.species.length || params.formula.length || params.level.length || params.confidence.length;
   const title = filtered ? "Search results" : "Search";
   const body = searchPage(params, results, facets);
   return html(c, title, body, "Search venoMS compounds, species, formulae, and guide pages.", index.pages, cacheHeaders("search"));
@@ -115,7 +115,7 @@ app.get("*", async (c) => {
     loadContentIndex(c.env.ASSETS, c.req.raw),
     loadRedirectIndex(c.env.ASSETS, c.req.raw),
   ]);
-  const redirect = redirects.redirects[canonical] || redirects.redirects[`${canonical}/`];
+  const redirect = findRedirect(redirects.redirects, canonical);
   if (redirect) {
     return c.redirect(redirect, 301);
   }
@@ -219,6 +219,9 @@ function browseResponse(c: AppContext, canonical: string, index: ContentIndex): 
   }
   if (segments.length === 2) {
     const body = subclassBrowsePage(index.pages, top, segments[1], meta.title, meta.base);
+    if (!body) {
+      return null;
+    }
     return html(c, meta.title, body, `Browse ${meta.title} compounds in venoMS.`, index.pages, cacheHeaders("page"));
   }
   return null;
@@ -276,7 +279,10 @@ export function fallbackSearch(index: ContentIndex, params: SearchParams): Searc
   const hi = params.mz !== null ? params.mz + params.tol : 0;
   return index.pages
     .filter((page) => {
-      if (params.term && !pageTerms(page).includes(params.term)) return false;
+      if (params.term) {
+        const termKey = normalizeTermKey(params.term);
+        if (!pageTerms(page).some((term) => normalizeTermKey(term) === termKey)) return false;
+      }
       if (params.family.length && !params.family.some((value) => page.family.includes(value))) return false;
       if (params.species.length && !params.species.some((value) => page.species.includes(value))) return false;
       if (params.formula.length && !params.formula.includes(page.formula)) return false;
@@ -352,4 +358,15 @@ function pageTerms(page: PageIndexEntry): string[] {
     page.level,
     page.confidence,
   ].filter(Boolean);
+}
+
+export function findRedirect(redirects: Record<string, string>, pathname: string): string | undefined {
+  const candidates = [pathname, `${pathname}/`];
+  try {
+    const decoded = decodeURIComponent(pathname);
+    candidates.push(decoded, `${decoded}/`);
+  } catch {
+    // Keep the encoded path when it contains a malformed percent escape.
+  }
+  return candidates.map((candidate) => redirects[candidate]).find(Boolean);
 }

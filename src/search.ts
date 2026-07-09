@@ -52,8 +52,8 @@ export async function searchPages(db: D1Database, params: SearchParams): Promise
   }
 
   if (params.term) {
-    clauses.push(`EXISTS (SELECT 1 FROM ${t.terms} tt WHERE tt.page_slug = p.slug AND tt.term_value = ?)`);
-    binds.push(params.term);
+    clauses.push(`EXISTS (SELECT 1 FROM ${t.terms} tt WHERE tt.page_slug = p.slug AND tt.term_key = ?)`);
+    binds.push(normalizeTermKey(params.term));
   }
 
   for (const type of FACET_TYPES) {
@@ -124,4 +124,13 @@ function ftsQuery(query: string): string {
     .filter(Boolean)
     .map((term) => `${term}*`)
     .join(" ");
+}
+
+export function normalizeTermKey(value: string): string {
+  return value
+    .normalize("NFKD")
+    .toLowerCase()
+    .replace(/[ßβ]/g, "b")
+    .replace(/\p{M}+/gu, "")
+    .replace(/[^\p{L}\p{N}]+/gu, "");
 }

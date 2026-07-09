@@ -3,12 +3,13 @@
 // Each content hash gets its own tables (pages_<v>, page_terms_<v>, pages_fts_<v>).
 // Seeding only ever CREATEs a new version — it never touches the live tables — so
 // production search is never emptied. The Worker reads `meta.active_version`;
-// promotion is a single atomic UPDATE of that pointer, done only for production
-// builds. Previews seed their own version but never promote. Usage:
-//   node scripts/seed-version.mjs                # remote, promote if prod branch / local-manual
+// promotion is a single atomic UPDATE of that pointer, done only after a
+// successful production Worker deploy. Builds and previews only seed. Usage:
+//   node scripts/seed-version.mjs                # remote seed, no promotion
 //   node scripts/seed-version.mjs --local        # local dev D1
 //   node scripts/seed-version.mjs --promote      # force promotion
 //   node scripts/seed-version.mjs --no-promote   # force preview behaviour
+//   node scripts/seed-version.mjs --promote-only # promote an already-seeded version
 
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
@@ -17,10 +18,10 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DB = process.env.D1_NAME || "venoms-search";
-const PROD_BRANCH = process.env.PROD_BRANCH || "master";
 const KEEP_RECENT = 3; // versions kept besides the active one (for rollback / in-flight previews)
 
 const scope = process.argv.includes("--local") ? "--local" : "--remote";
+const promoteOnly = process.argv.includes("--promote-only");
 const version = readFileSync(path.join(root, ".generated", "search-version.txt"), "utf8").trim();
 const seedFile = path.join(root, ".generated", "search-seed.sql");
 const now = new Date().toISOString();
@@ -48,10 +49,7 @@ function query(sql) {
 
 function shouldPromote() {
   if (process.argv.includes("--no-promote")) return false;
-  if (process.argv.includes("--promote") || process.env.PROMOTE === "1") return true;
-  const ciBranch = process.env.WORKERS_CI_BRANCH; // set by Cloudflare Workers Builds
-  if (ciBranch !== undefined) return ciBranch === PROD_BRANCH; // CI: only the production branch promotes
-  return true; // local / manual deploy is always a production promote
+  return promoteOnly || process.argv.includes("--promote") || process.env.PROMOTE === "1";
 }
 
 query("CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT NOT NULL)");
@@ -60,11 +58,15 @@ query("CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT NOT NUL
 const existing = query(`SELECT count(*) AS c FROM sqlite_master WHERE type='table' AND name='${P}'`)[0]?.c ?? 0;
 const populated = existing ? (query(`SELECT count(*) AS c FROM ${P}`)[0]?.c ?? 0) : 0;
 
+if (promoteOnly && populated === 0) {
+  throw new Error(`Cannot promote search version ${version}: version tables are not populated`);
+}
+
 if (populated > 0) {
   console.log(`Version ${version} already present (${populated} pages) — skipping seed.`);
-} else {
+} else if (!promoteOnly) {
   console.log(`Seeding search version ${version}...`);
-  wrangler(["d1", "execute", DB, scope, "--file", seedFile]);
+  wrangler(["d1", "execute", DB, scope, "--file", seedFile], true);
   query(`INSERT OR REPLACE INTO meta (key, value) VALUES ('created:${version}', '${now}')`);
   console.log(`Version ${version} seeded.`);
 }
@@ -74,7 +76,7 @@ if (shouldPromote()) {
   console.log(`Promoted ${version} to active.`);
   garbageCollect();
 } else {
-  console.log(`Preview build — left active_version untouched (production keeps its version).`);
+  console.log(`Version ${version} left inactive until a successful production deploy.`);
 }
 
 function garbageCollect() {
