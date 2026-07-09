@@ -646,6 +646,12 @@ const STRUCTURE_TOPS: Array<{ top: string; title: string; base: string }> = [
   { top: "small-compounds", title: "Small compounds", base: "/small-compounds" },
 ];
 
+// Real spider family names end in -idae; this filters out header/typo artefacts
+// ("Family", "familiy") and genus-level values ("Cupiennius") from the taxonomy tree.
+function isSpiderFamily(value: string): boolean {
+  return /idae$/i.test(value);
+}
+
 export function buildNavModel(pages: PageIndexEntry[]): NavModel {
   const subMap = new Map<string, NavSubclass>();
   const familyMap = new Map<string, { count: number; species: Set<string> }>();
@@ -670,6 +676,7 @@ export function buildNavModel(pages: PageIndexEntry[]): NavModel {
       }
     }
     for (const family of page.family) {
+      if (!isSpiderFamily(family)) continue;
       const fm = familyMap.get(family) || { count: 0, species: new Set<string>() };
       fm.count += 1;
       familyMap.set(family, fm);
@@ -677,6 +684,7 @@ export function buildNavModel(pages: PageIndexEntry[]): NavModel {
     // Add each species only under the family it is actually paired with in the
     // compound's spider-species table (not every family the compound appears in).
     for (const [sp, fam] of page.speciesFamily ?? []) {
+      if (!isSpiderFamily(fam)) continue;
       const fm = familyMap.get(fam);
       if (fm) fm.species.add(sp);
     }

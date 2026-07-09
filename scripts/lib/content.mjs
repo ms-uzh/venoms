@@ -151,12 +151,9 @@ function extractTableFacts(markdown) {
       facts.formula = value.replaceAll("₀", "0").replaceAll("₁", "1").replaceAll("₂", "2").replaceAll("₃", "3").replaceAll("₄", "4").replaceAll("₅", "5").replaceAll("₆", "6").replaceAll("₇", "7").replaceAll("₈", "8").replaceAll("₉", "9");
     } else if (key.startsWith("precursor 1")) {
       facts.precursor1 = Number(value) || null;
-    } else if (key === "spider species" && cells[1] && cells[1].toLowerCase() !== "family") {
-      facts.species.push(cells[0]);
-      if (cells[1]) {
-        facts.family.push(cells[1]);
-      }
     }
+    // Species/family pairs come from extractSpeciesFamily (row-level), not here —
+    // the old "spider species" branch only ever leaked mis-typed header cells.
   }
 
   return {
