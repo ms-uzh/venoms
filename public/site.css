@@ -420,8 +420,16 @@ table.msms tr:last-child td { border-bottom: 0; }
 .metric strong { font-family: var(--mono); font-size: 1.02rem; overflow-wrap: anywhere; }
 .metric span { font-size: .8rem; color: var(--ink-2); }
 
+.calc-sections { display: grid; gap: 14px; }
+.calc-section { border: 1px solid var(--line); border-radius: 11px; padding: 13px 15px; background: var(--surface-2); }
+.calc-section-head { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
+  color: var(--ink-2); margin-bottom: 11px; }
+.calc-section-head span { float: right; letter-spacing: .04em; text-transform: none; font-weight: 500; color: var(--ink-3); }
 .calc-form { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  margin: 24px 0 30px; align-items: end; }
+  margin: 0; align-items: end; }
+.calc-form.single { grid-template-columns: minmax(0, 260px); }
+.calc-form.units { grid-template-columns: repeat(auto-fill, minmax(116px, 1fr)); gap: 9px; }
+.calc-form.spiders { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
 .calc-form label { color: var(--ink-2); display: grid; gap: 5px; font-size: .8rem; }
 .markdown-output { font-family: var(--mono); min-height: 320px; width: 100%; }
 

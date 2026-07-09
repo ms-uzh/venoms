@@ -572,13 +572,25 @@ export function calcPage(config: CalcConfig, input: CalculationInput, result: Ca
     <p class="lead">Assemble a polyamine from a head group, backbone selectors, and a tail — venoMS returns
       the generic name, molecular formula, mass, precursor ions, HDX, and the full a/b/c/z/y fragment series.</p>
     <form class="card" action="/calc" method="post" style="margin:22px 0 8px">
-      <div class="calc-form" style="margin:0">
-        ${select("head", "Head", config.heads.map((item) => item.name), input.head)}
-        ${polySelects}
-        ${select("tail", "Tail", config.tails.map((item) => item.name), input.tail)}
-        ${spiderSelects}
+      <div class="calc-sections">
+        <section class="calc-section">
+          <div class="calc-section-head">Head</div>
+          <div class="calc-form single">${select("head", "Head group", config.heads.map((item) => item.name), input.head)}</div>
+        </section>
+        <section class="calc-section">
+          <div class="calc-section-head">Polyamine units <span>backbone, head&nbsp;→&nbsp;tail</span></div>
+          <div class="calc-form units">${polySelects}</div>
+        </section>
+        <section class="calc-section">
+          <div class="calc-section-head">Tail</div>
+          <div class="calc-form single">${select("tail", "Tail group", config.tails.map((item) => item.name), input.tail)}</div>
+        </section>
+        <section class="calc-section">
+          <div class="calc-section-head">Co-eluting spiders <span>optional</span></div>
+          <div class="calc-form spiders">${spiderSelects}</div>
+        </section>
       </div>
-      <div style="margin-top:16px"><button type="submit">Calculate</button></div>
+      <div style="margin-top:18px"><button type="submit">Calculate</button></div>
     </form>
     ${result ? calcResult(result) : ""}
   </section>`;
