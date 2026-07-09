@@ -1,14 +1,23 @@
-name: build github pages
+name: build
 
-on: [pull_request]
+on:
+  pull_request:
+  push:
+    branches:
+      - master
 
 jobs:
-  build:
-    runs-on: ubuntu-18.04
+  worker:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: build
-      uses: peaceiris/actions-hugo@v0.58.0
-      with:
-        args: --gc --minify --cleanDestinationDir
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run ci

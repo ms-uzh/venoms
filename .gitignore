@@ -17,5 +17,11 @@
 # MacOS
 .DS_Store
 
-# Hugo Public Folder
-public
+# Cloudflare / Node generated files
+node_modules/
+.wrangler/
+dist/
+.generated/
+worker-configuration.d.ts
+public/content/
+public/data/

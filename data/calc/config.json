@@ -1,0 +1,1355 @@
+{
+  "heads": [
+    {
+      "name": "-",
+      "formula": [],
+      "mass": 0,
+      "hdx": 0,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "2,4-(OH)₂-PhAc",
+      "formula": [
+        "C8",
+        "H7",
+        "O3"
+      ],
+      "mass": 151.03951908432,
+      "hdx": 2,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "2,5-(OH)₂-Bz",
+      "formula": [
+        "C7",
+        "H5",
+        "O3"
+      ],
+      "mass": 137.02386901986,
+      "hdx": 2,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "4-OH-Bz",
+      "formula": [
+        "C7",
+        "H5",
+        "O2"
+      ],
+      "mass": 121.02895440029,
+      "hdx": 1,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "4-OH-IndAc",
+      "formula": [
+        "C10",
+        "H8",
+        "N",
+        "O2"
+      ],
+      "mass": 174.05550350141,
+      "hdx": 2,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "4-OH-PhAc",
+      "formula": [
+        "C8",
+        "H7",
+        "O2"
+      ],
+      "mass": 135.04460446475,
+      "hdx": 1,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "4-OH-PhLac",
+      "formula": [
+        "C9",
+        "H9",
+        "O3"
+      ],
+      "mass": 165.05516914878,
+      "hdx": 2,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "Ac",
+      "formula": [
+        "C2",
+        "H3",
+        "O"
+      ],
+      "mass": 43.01838971626,
+      "hdx": 0,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "Bz",
+      "formula": [
+        "C7",
+        "H5",
+        "O"
+      ],
+      "mass": 105.03403978072,
+      "hdx": 0,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "IndAc",
+      "formula": [
+        "C10",
+        "H8",
+        "N",
+        "O"
+      ],
+      "mass": 158.06058888184,
+      "hdx": 1,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "IndLac",
+      "formula": [
+        "C11",
+        "H10",
+        "N",
+        "O2"
+      ],
+      "mass": 188.07115356587,
+      "hdx": 2,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "OH-OMe-Bz",
+      "formula": [
+        "C8",
+        "H7",
+        "O3"
+      ],
+      "mass": 151.03951908432,
+      "hdx": 1,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "PA",
+      "formula": [
+        "H"
+      ],
+      "mass": 1.00782503223,
+      "hdx": 1,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "PhAc",
+      "formula": [
+        "C8",
+        "H7",
+        "O"
+      ],
+      "mass": 119.04968984518,
+      "hdx": 0,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "Phe",
+      "formula": [
+        "C9",
+        "H10",
+        "N",
+        "O"
+      ],
+      "mass": 148.0762389463,
+      "hdx": 2,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "PhLac",
+      "formula": [
+        "C9",
+        "H9",
+        "O2"
+      ],
+      "mass": 149.06025452921,
+      "hdx": 1,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "Prop",
+      "formula": [
+        "C3",
+        "H5",
+        "O"
+      ],
+      "mass": 57.03403978072,
+      "hdx": 0,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "Trp",
+      "formula": [
+        "C11",
+        "H11",
+        "N2",
+        "O"
+      ],
+      "mass": 187.08713798296,
+      "hdx": 3,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "Tyr",
+      "formula": [
+        "C9",
+        "H10",
+        "N",
+        "O2"
+      ],
+      "mass": 164.07115356587,
+      "hdx": 0,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    }
+  ],
+  "polyamines": [
+    {
+      "name": "-",
+      "formula": [],
+      "mass": 0,
+      "hdx": 0,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "3",
+      "formula": [
+        "C3",
+        "H7",
+        "N"
+      ],
+      "mass": 57.05784923004,
+      "hdx": 1,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "(Me)3",
+      "formula": [
+        "C4",
+        "H9",
+        "N"
+      ],
+      "mass": 71.0734992945,
+      "hdx": 0,
+      "quaternary": 0,
+      "sub": {
+        "name": "Me",
+        "mass": 14.01565006446
+      }
+    },
+    {
+      "name": "(Me₂)3",
+      "formula": [
+        "C5",
+        "H12",
+        "N"
+      ],
+      "mass": 86.09697439119,
+      "hdx": 0,
+      "quaternary": 1,
+      "sub": {
+        "name": "C2H5",
+        "mass": 29.03912516115
+      }
+    },
+    {
+      "name": "(OH)3",
+      "formula": [
+        "C3",
+        "H7",
+        "N",
+        "O"
+      ],
+      "mass": 73.05276384961,
+      "hdx": 1,
+      "quaternary": 0,
+      "sub": {
+        "name": "O",
+        "mass": 15.99491461957
+      }
+    },
+    {
+      "name": "4",
+      "formula": [
+        "C4",
+        "H9",
+        "N"
+      ],
+      "mass": 71.0734992945,
+      "hdx": 1,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "(Me)4",
+      "formula": [
+        "C5",
+        "H11",
+        "N"
+      ],
+      "mass": 85.08914935896,
+      "hdx": 0,
+      "quaternary": 0,
+      "sub": {
+        "name": "Me",
+        "mass": 14.01565006446
+      }
+    },
+    {
+      "name": "(Me₂)4",
+      "formula": [
+        "C6",
+        "H14",
+        "N"
+      ],
+      "mass": 100.11262445565,
+      "hdx": 0,
+      "quaternary": 1,
+      "sub": {
+        "name": "C2H5",
+        "mass": 29.03912516115
+      }
+    },
+    {
+      "name": "(OH)4",
+      "formula": [
+        "C4",
+        "H9",
+        "N",
+        "O"
+      ],
+      "mass": 87.06841391407,
+      "hdx": 1,
+      "quaternary": 0,
+      "sub": {
+        "name": "O",
+        "mass": 15.99491461957
+      }
+    },
+    {
+      "name": "5",
+      "formula": [
+        "C5",
+        "H11",
+        "N"
+      ],
+      "mass": 85.08914935896,
+      "hdx": 1,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "Ala",
+      "formula": [
+        "C3",
+        "H5",
+        "N",
+        "O"
+      ],
+      "mass": 71.03711378515,
+      "hdx": 1,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "ßAla",
+      "formula": [
+        "C3",
+        "H5",
+        "N",
+        "O"
+      ],
+      "mass": 71.03711378515,
+      "hdx": 1,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "Asn",
+      "formula": [
+        "C4",
+        "H6",
+        "N2",
+        "O2"
+      ],
+      "mass": 114.04292744138,
+      "hdx": 3,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "Asp",
+      "formula": [
+        "C4",
+        "H5",
+        "N",
+        "O3"
+      ],
+      "mass": 115.02694302429,
+      "hdx": 3,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "Gln",
+      "formula": [
+        "C5",
+        "H8",
+        "N2",
+        "O2"
+      ],
+      "mass": 128.05857750584,
+      "hdx": 3,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "Gly",
+      "formula": [
+        "C2",
+        "H3",
+        "N",
+        "O"
+      ],
+      "mass": 57.02146372069,
+      "hdx": 1,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "Lys",
+      "formula": [
+        "C6",
+        "H12",
+        "N2",
+        "O1"
+      ],
+      "mass": 128.09496301519,
+      "hdx": 3,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "LysMe",
+      "formula": [
+        "C7",
+        "H14",
+        "N2",
+        "O1"
+      ],
+      "mass": 142.11061307965,
+      "hdx": 2,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "LysMe₂",
+      "formula": [
+        "C8",
+        "H16",
+        "N2",
+        "O1"
+      ],
+      "mass": 156.12626314411,
+      "hdx": 1,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "Orn",
+      "formula": [
+        "C5",
+        "H10",
+        "N2",
+        "O1"
+      ],
+      "mass": 114.07931295073,
+      "hdx": 3,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    }
+  ],
+  "tails": [
+    {
+      "name": "-",
+      "formula": [],
+      "mass": 0,
+      "hdx": 0,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "",
+      "formula": [
+        "H2",
+        "N"
+      ],
+      "mass": 16.01872406889,
+      "hdx": 2,
+      "quaternary": 0,
+      "sub": {
+        "name": "",
+        "mass": 0
+      }
+    },
+    {
+      "name": "(NMe)",
+      "formula": [
+        "C1",
+        "H4",
+        "N"
+      ],
+      "mass": 30.03437413335,
+      "hdx": 1,
+      "quaternary": 0,
+      "sub": {
+        "name": "CH2",
+        "mass": 14.01565006446
+      }
+    },
+    {
+      "name": "(NMe₂)",
+      "formula": [
+        "C2",
+        "H6",
+        "N"
+      ],
+      "mass": 44.05002419781,
+      "hdx": 0,
+      "quaternary": 0,
+      "sub": {
+        "name": "C2H4",
+        "mass": 28.03130012892
+      }
+    },
+    {
+      "name": "(NMe₃)",
+      "formula": [
+        "C3",
+        "H9",
+        "N"
+      ],
+      "mass": 59.0734992945,
+      "hdx": 0,
+      "quaternary": 1,
+      "sub": {
+        "name": "C3H7",
+        "mass": 43.05477522561
+      }
+    },
+    {
+      "name": "Ac",
+      "formula": [
+        "C2",
+        "H4",
+        "N",
+        "O"
+      ],
+      "mass": 58.02928875292,
+      "hdx": 1,
+      "quaternary": 0,
+      "sub": {
+        "name": "C2H20",
+        "mass": 42.01056468403
+      }
+    },
+    {
+      "name": "Arg",
+      "formula": [
+        "C6",
+        "H14",
+        "N5",
+        "O"
+      ],
+      "mass": 172.11983509294,
+      "hdx": 7,
+      "quaternary": 0,
+      "sub": {
+        "name": "C6H12N4O",
+        "mass": 156.10111102405
+      }
+    },
+    {
+      "name": "Gu",
+      "formula": [
+        "C1",
+        "H4",
+        "N3"
+      ],
+      "mass": 58.04052214221,
+      "hdx": 4,
+      "quaternary": 0,
+      "sub": {
+        "name": "CH2N2",
+        "mass": 42.02179807332
+      }
+    },
+    {
+      "name": "Lys",
+      "formula": [
+        "C6",
+        "H14",
+        "N3",
+        "O"
+      ],
+      "mass": 144.11368708408,
+      "hdx": 5,
+      "quaternary": 0,
+      "sub": {
+        "name": "C6H12N2O",
+        "mass": 128.09496301519
+      }
+    },
+    {
+      "name": "(2,5-(OH)₂-Bz)",
+      "formula": [
+        "C7",
+        "H6",
+        "N",
+        "O3"
+      ],
+      "mass": 152.03476805652,
+      "hdx": 3,
+      "quaternary": 0,
+      "sub": {
+        "name": "C7H4O3",
+        "mass": 136.01604398763
+      }
+    },
+    {
+      "name": "(4-OH-Bz)",
+      "formula": [
+        "C7",
+        "H6",
+        "N",
+        "O2"
+      ],
+      "mass": 136.03985343695,
+      "hdx": 2,
+      "quaternary": 0,
+      "sub": {
+        "name": "C7H4O2",
+        "mass": 120.02112936806
+      }
+    }
+  ],
+  "spiders": [
+    {
+      "species": "-",
+      "family": ""
+    },
+    {
+      "species": "Acanthoscurria geniculata",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Acanthoscurria gomesiana",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Acanthoscurria paulensis",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Acanthoscurria sternalis",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Aculepeira sp.",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Agelena labyrinthica",
+      "family": "Agelenidae"
+    },
+    {
+      "species": "Agelena limbata",
+      "family": "Agelenidae"
+    },
+    {
+      "species": "Agelena orientalis",
+      "family": "Agelenidae"
+    },
+    {
+      "species": "Agelenopsis aperta",
+      "family": "Agelenidae"
+    },
+    {
+      "species": "Agelenopsis potteri",
+      "family": "Agelenidae"
+    },
+    {
+      "species": "Allagelena opulenta",
+      "family": "Agelenidae"
+    },
+    {
+      "species": "Alopecosa sp.",
+      "family": "Lycosidae"
+    },
+    {
+      "species": "Anemesia incana",
+      "family": "Cyrtaucheniidae"
+    },
+    {
+      "species": "Aphonopelma chalcodes",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Aphonopelma hentzi",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Aphonopelma seemanni",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Aphonopelma sp.",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Araneus diadematus",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Araneus gemma",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Araneus sp.",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Araneus tartaricus",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Araneus ventricosus",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Argiope aurantia",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Argiope bruennichi",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Argiope florida",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Argiope lobata",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Argiope trifasciata",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Ariadna bicolor",
+      "family": "Segestriidae"
+    },
+    {
+      "species": "Ariadna sp.",
+      "family": "Segestriidae"
+    },
+    {
+      "species": "Atrax robustus",
+      "family": "Atracidae"
+    },
+    {
+      "species": "Avicularia avicularia",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Brachypelma emilia",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Brachypelma smithi",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Ceratogyrus darlingi",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Ceratogyrus marshalli",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Cheiracanthium japonicum",
+      "family": "Cheiracanthiidae"
+    },
+    {
+      "species": "Chilobrachys sp.",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Coelotes pastoralis",
+      "family": "Agelenidae"
+    },
+    {
+      "species": "Cupiennius salei",
+      "family": "Trechaleidae"
+    },
+    {
+      "species": "Cyriopagopus albostriatus",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Cyriopagopus hainanus",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Cyriopagopus lividum",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Cyriopagopus schmidti",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Delena cancerides",
+      "family": "Sparassidae"
+    },
+    {
+      "species": "Desertosa sp.*",
+      "family": "Lycosidae"
+    },
+    {
+      "species": "Diguetia canities",
+      "family": "Diguetidae"
+    },
+    {
+      "species": "Dolomedes gertschi",
+      "family": "Pisauridae"
+    },
+    {
+      "species": "Dolomedes okefinokensis",
+      "family": "Pisauridae"
+    },
+    {
+      "species": "Dolomedes sulfureus",
+      "family": "Pisauridae"
+    },
+    {
+      "species": "Dolomedes tenebrosus",
+      "family": "Pisauridae"
+    },
+    {
+      "species": "Drassodes sp.",
+      "family": "Gnaphosidae"
+    },
+    {
+      "species": "Eratigena agrestis",
+      "family": "Agelenidae"
+    },
+    {
+      "species": "Eresus sp.",
+      "family": "Eresidae"
+    },
+    {
+      "species": "Eriophora edax",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Eurypelma californicum*",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Eurypelma vellutinum*",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Eusparassus oculatus",
+      "family": "Sparassidae"
+    },
+    {
+      "species": "Geolycosa sp.",
+      "family": "Lycosidae"
+    },
+    {
+      "species": "Grammostola actaeon",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Grammostola anthracina",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Grammostola pulchripes",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Grammostola rosea",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Harpactirella sp.",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Hebestatis theveneti",
+      "family": "Halonoproctidae"
+    },
+    {
+      "species": "Heteropoda davidbowie",
+      "family": "Sparassidae"
+    },
+    {
+      "species": "Heteropoda venatoria",
+      "family": "Sparassidae"
+    },
+    {
+      "species": "Heteroscodra maculata",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Hippocosa sp.*",
+      "family": "Lycosidae"
+    },
+    {
+      "species": "Hogna carolinensis",
+      "family": "Lycosidae"
+    },
+    {
+      "species": "Hogna sp.",
+      "family": "Lycosidae"
+    },
+    {
+      "species": "Holconia flindersi",
+      "family": "Sparassidae"
+    },
+    {
+      "species": "Hololena curta",
+      "family": "Agelenidae"
+    },
+    {
+      "species": "Hololena sp.",
+      "family": "Agelenidae"
+    },
+    {
+      "species": "Isopedella canberrensus*",
+      "family": "Sparassidae"
+    },
+    {
+      "species": "Isopedella leai",
+      "family": "Sparassidae"
+    },
+    {
+      "species": "Kukulcania hibernalis",
+      "family": "Filistatidae"
+    },
+    {
+      "species": "Kukulcania sp.",
+      "family": "Filistatidae"
+    },
+    {
+      "species": "Lachesana sp.*",
+      "family": "Zodariidae"
+    },
+    {
+      "species": "Lampona cylindrata",
+      "family": "Lamponidae"
+    },
+    {
+      "species": "Larinioides cornutus",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Larinioides patagiatus",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Larinioides sp.",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Lasiodora klugi",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Lasiodora sp.",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Latrodectus dahli",
+      "family": "Theridiidae"
+    },
+    {
+      "species": "Latrodectus mactans",
+      "family": "Theridiidae"
+    },
+    {
+      "species": "Latrodectus menavodi",
+      "family": "Theridiidae"
+    },
+    {
+      "species": "Latrodectus tredecimguttatus",
+      "family": "Theridiidae"
+    },
+    {
+      "species": "Loxosceles arizonica",
+      "family": "Sicariidae"
+    },
+    {
+      "species": "Loxosceles deserta",
+      "family": "Sicariidae"
+    },
+    {
+      "species": "Loxosceles intermedia",
+      "family": "Sicariidae"
+    },
+    {
+      "species": "Loxosceles reclusa",
+      "family": "Sicariidae"
+    },
+    {
+      "species": "Loxosceles rufescens",
+      "family": "Sicariidae"
+    },
+    {
+      "species": "Loxosceles sp.",
+      "family": "Sicariidae"
+    },
+    {
+      "species": "Lycosa erythrognatha",
+      "family": "Lycosidae"
+    },
+    {
+      "species": "Lycosa godeffroyi",
+      "family": "Lycosidae"
+    },
+    {
+      "species": "Lycosa indagatrix",
+      "family": "Lycosidae"
+    },
+    {
+      "species": "Lycosa praegrandis",
+      "family": "Lycosidae"
+    },
+    {
+      "species": "Lycosa sp.",
+      "family": "Lycosidae"
+    },
+    {
+      "species": "Macrothele gigas",
+      "family": "Macrothelidae"
+    },
+    {
+      "species": "Macrothele sp.",
+      "family": "Macrothelidae"
+    },
+    {
+      "species": "Micrommata virescens",
+      "family": "Sparassidae"
+    },
+    {
+      "species": "Misumena vatia",
+      "family": "Thomisidae"
+    },
+    {
+      "species": "Neoscona arabesca",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Neoscona nautica",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Neosparassus diana",
+      "family": "Sparassidae"
+    },
+    {
+      "species": "Nephila clavata",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Nephila pilipes",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Nephilingis borbonica",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Nephilingis cruentata",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Olios sp.",
+      "family": "Sparassidae"
+    },
+    {
+      "species": "Ozyptila lugubris",
+      "family": "Thomisidae"
+    },
+    {
+      "species": "Palpimanus sp.",
+      "family": "Palpimanidae"
+    },
+    {
+      "species": "Parasteatoda tepidariorum",
+      "family": "Theridiidae"
+    },
+    {
+      "species": "Parawixia bistriata",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Pelinobius muticus",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Peucetia viridans",
+      "family": "Oxyopidae"
+    },
+    {
+      "species": "Phidippus sp.",
+      "family": "Salticidae"
+    },
+    {
+      "species": "Phoneutria fera",
+      "family": "Ctenidae"
+    },
+    {
+      "species": "Phoneutria nigriventer",
+      "family": "Ctenidae"
+    },
+    {
+      "species": "Phormictopus cancerides",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Physocyclus mexicanus",
+      "family": "Pholcidae"
+    },
+    {
+      "species": "Pireneitega luctuosa",
+      "family": "Agelenidae"
+    },
+    {
+      "species": "Pisaura mirabilis",
+      "family": "Pisauridae"
+    },
+    {
+      "species": "Plectreurys tristis",
+      "family": "Plectreuridae"
+    },
+    {
+      "species": "Psalmopoeus cambridgei",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Psalmopoeus irminia",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Rabidosa sp.",
+      "family": "Lycosidae"
+    },
+    {
+      "species": "Raveniola micrura*",
+      "family": "Nemesiidae"
+    },
+    {
+      "species": "Sahydroaraneus collinus",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Selenocosmia sp.",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Steatoda grossa",
+      "family": "Theridiidae"
+    },
+    {
+      "species": "Steatoda paykulliana",
+      "family": "Theridiidae"
+    },
+    {
+      "species": "Stegodyphus sp.",
+      "family": "Eresidae"
+    },
+    {
+      "species": "Stromatopelma calceatum griseipes",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Tegenaria domestica",
+      "family": "Agelenidae"
+    },
+    {
+      "species": "Thomisus onustus",
+      "family": "Thomisidae"
+    },
+    {
+      "species": "Thanatus striatus",
+      "family": "Philodromidae"
+    },
+    {
+      "species": "Titanoeca sp.",
+      "family": "Titanoecidae"
+    },
+    {
+      "species": "Trichonephila clavipes",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Trichonephila inaurata madagascariensis",
+      "family": "Araneidae"
+    },
+    {
+      "species": "Vitalius dubius",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Vitalius roseus",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Vitalius sorocabae",
+      "family": "Theraphosidae"
+    },
+    {
+      "species": "Vitalius vellutinus",
+      "family": "Theraphosidae"
+    }
+  ],
+  "app": {
+    "maxPolyamineSelectors": 10
+  }
+}

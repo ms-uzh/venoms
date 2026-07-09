@@ -1,0 +1,36 @@
+{
+  "name": "venoms-workers",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run prepare:assets && wrangler dev --local --persist-to .wrangler/state",
+    "types": "wrangler types",
+    "build": "npm run types && npm run prepare:assets && tsc --noEmit && wrangler deploy --dry-run --outdir dist",
+    "ci": "npm run types && npm run prepare:assets && npm run validate && npm test && tsc --noEmit && wrangler deploy --dry-run --outdir dist",
+    "prepare:assets": "npm run calc:data && npm run content:index && npm run redirects && npm run content:sync",
+    "content:sync": "node scripts/sync-content-assets.mjs",
+    "content:index": "node scripts/build-content-index.mjs",
+    "redirects": "node scripts/build-redirects.mjs",
+    "calc:data": "node scripts/generate-calc-data.mjs",
+    "search:index": "node scripts/build-search-index.mjs",
+    "db:migrate": "wrangler d1 execute venoms-search --local --file=migrations/0001_schema.sql",
+    "db:seed": "npm run prepare:assets && npm run search:index && wrangler d1 execute venoms-search --local --file=.generated/search-seed.sql > .generated/d1-seed-result.json",
+    "setup:local": "npm run types && npm run db:migrate && npm run db:seed",
+    "validate": "node scripts/validate-content.mjs",
+    "test": "vitest run",
+    "smoke": "node scripts/smoke-local.mjs"
+  },
+  "dependencies": {
+    "hono": "^4.8.4",
+    "marked": "^13.0.3",
+    "smol-toml": "^1.4.2",
+    "yaml": "^2.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "typescript": "^5.8.3",
+    "vitest": "^4.1.10",
+    "wrangler": "^4.107.1"
+  }
+}

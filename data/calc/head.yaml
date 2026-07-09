@@ -1,0 +1,91 @@
+- Name: '-'
+- Name: '2,4-(OH)₂-PhAc'
+  Formula: ['C8', 'H7', 'O3']
+  Mass: 151.03951908432
+  HDX: 2
+  Quaternary: 0
+- Name: '2,5-(OH)₂-Bz'
+  Formula: ['C7', 'H5', 'O3']
+  Mass: 137.02386901986
+  HDX: 2
+  Quaternary: 0
+- Name: '4-OH-Bz'
+  Formula: ['C7', 'H5', 'O2']
+  Mass: 121.02895440029
+  HDX: 1
+  Quaternary: 0
+- Name: '4-OH-IndAc'
+  Formula: ['C10', 'H8', 'N', 'O2']
+  Mass: 174.05550350141
+  HDX: 2
+  Quaternary: 0
+- Name: '4-OH-PhAc'
+  Formula: ['C8', 'H7', 'O2']
+  Mass: 135.04460446475
+  HDX: 1
+  Quaternary: 0
+- Name: '4-OH-PhLac'
+  Formula: ['C9', 'H9', 'O3']
+  Mass: 165.05516914878
+  HDX: 2
+  Quaternary: 0
+- Name: 'Ac'
+  Formula: ['C2', 'H3', 'O']
+  Mass: 43.01838971626
+  HDX: 0
+  Quaternary: 0
+- Name: 'Bz'
+  Formula: ['C7', 'H5', 'O']
+  Mass: 105.03403978072
+  HDX: 0
+  Quaternary: 0
+- Name: 'IndAc'
+  Formula: ['C10', 'H8', 'N', 'O']
+  Mass: 158.06058888184
+  HDX: 1
+  Quaternary: 0
+- Name: 'IndLac'
+  Formula: ['C11', 'H10', 'N', 'O2']
+  Mass: 188.07115356587
+  HDX: 2
+  Quaternary: 0
+- Name: 'OH-OMe-Bz'
+  Formula: ['C8', 'H7', 'O3']
+  Mass: 151.03951908432
+  HDX: 1
+  Quaternary: 0
+- Name: 'PA'
+  Formula: [ 'H']
+  Mass: 1.00782503223
+  HDX: 1
+  Quaternary: 0
+- Name: 'PhAc'
+  Formula: ['C8', 'H7', 'O']
+  Mass: 119.04968984518
+  HDX: 0
+  Quaternary: 0
+- Name: 'Phe'
+  Formula: ['C9', 'H10', 'N', 'O']
+  Mass: 148.07623894630
+  HDX: 2
+  Quaternary: 0
+- Name: 'PhLac'
+  Formula: ['C9', 'H9', 'O2']
+  Mass: 149.06025452921
+  HDX: 1
+  Quaternary: 0 
+- Name: 'Prop'
+  Formula: ['C3', 'H5', 'O']
+  Mass: 57.03403978072
+  HDX: 0
+  Quaternary: 0
+- Name: 'Trp'
+  Formula: ['C11', 'H11', 'N2', 'O']
+  Mass: 187.08713798296
+  HDX: 3
+  Quaternary: 0
+- Name: 'Tyr'
+  Formula: ['C9', 'H10', 'N', 'O2']
+  Mass: 164.07115356587
+  HDX: 0
+  Quaternary: 0
