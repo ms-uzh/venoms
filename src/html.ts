@@ -9,9 +9,11 @@ export type LayoutOptions = {
   description?: string;
   navPages?: PageIndexEntry[];
   currentPath?: string;
+  headExtra?: string;
+  analyticsToken?: string;
 };
 
-export function layout({ title, body, description, navPages = [], currentPath = "/" }: LayoutOptions): string {
+export function layout({ title, body, description, navPages = [], currentPath = "/", headExtra = "", analyticsToken = "" }: LayoutOptions): string {
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -20,6 +22,7 @@ export function layout({ title, body, description, navPages = [], currentPath = 
   <title>${escapeHtml(title)} :: venoMS</title>
   ${description ? `<meta name="description" content="${escapeHtml(description)}">` : ""}
   <link rel="stylesheet" href="/site.css">
+  ${headExtra}
 </head>
 <body>
   <div class="shell">
@@ -56,46 +59,54 @@ export function layout({ title, body, description, navPages = [], currentPath = 
     </main>
   </div>
   ${omniScript}
+  ${analyticsToken ? `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${escapeHtml(analyticsToken)}"}'></script>` : ""}
 </body>
 </html>`;
 }
 
 const omniScript = `<script>
 (function(){
-  var input=document.getElementById('omni'), pop=document.getElementById('omniPop');
-  if(!input||!pop) return;
-  var data=null, cur=-1, rows=[];
+  var boxes=[].slice.call(document.querySelectorAll('.omni'));
+  if(!boxes.length) return;
+  var data=null;
   function load(){ if(data) return Promise.resolve(); return fetch('/data/suggest.json').then(function(r){return r.json();}).then(function(j){data=j;}).catch(function(){data=[];}); }
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   function sub(f){ return f.replace(/([A-Za-z)\\]])(\\d+)/g,'$1<sub>$2</sub>'); }
-  function close(){ pop.classList.remove('show'); pop.innerHTML=''; cur=-1; rows=[]; }
-  function search(q){
-    q=(q||'').trim(); if(!q||!data){ close(); return; }
-    var lower=q.toLowerCase(); var num=parseFloat(q); var isNum=!isNaN(num)&&/^[0-9.]+$/.test(q);
-    var hits=[];
-    for(var i=0;i<data.length && hits.length<8;i++){ var d=data[i];
-      if(d.t.toLowerCase().indexOf(lower)>=0 || (d.f&&d.f.toLowerCase().indexOf(lower)>=0) || (d.g&&d.g.toLowerCase().indexOf(lower)>=0) || (isNum&&d.m!=null&&Math.abs(d.m-num)<=0.5)) hits.push(d);
+  function setup(box){
+    var input=box.querySelector('input[type=search]'), pop=box.querySelector('.omni-pop');
+    if(!input||!pop) return;
+    var cur=-1, rows=[];
+    function close(){ pop.classList.remove('show'); pop.innerHTML=''; cur=-1; rows=[]; }
+    function search(q){
+      q=(q||'').trim(); if(!q||!data){ close(); return; }
+      var lower=q.toLowerCase(); var num=parseFloat(q); var isNum=!isNaN(num)&&/^[0-9.]+$/.test(q);
+      var hits=[];
+      for(var i=0;i<data.length && hits.length<8;i++){ var d=data[i];
+        if(d.t.toLowerCase().indexOf(lower)>=0 || (d.f&&d.f.toLowerCase().indexOf(lower)>=0) || (d.g&&d.g.toLowerCase().indexOf(lower)>=0) || (isNum&&d.m!=null&&Math.abs(d.m-num)<=0.5)) hits.push(d);
+      }
+      if(!hits.length){ close(); return; }
+      rows=hits; cur=-1;
+      var html='<div class="sec">'+(isNum?'Mass matches':'Compounds')+'</div>';
+      for(var k=0;k<hits.length;k++){ var h=hits[k];
+        html+='<a class="omni-row" href="/'+esc(h.s)+'"><span class="nm">'+esc(h.t)+'</span><span class="fo">'+sub(esc(h.f))+'</span>'+(h.g?'<span class="kindtag">'+esc(h.g)+'</span>':'')+'<span class="ms">'+(h.m!=null?h.m.toFixed(4):'')+'</span></a>';
+      }
+      pop.innerHTML=html; pop.classList.add('show');
     }
-    if(!hits.length){ close(); return; }
-    rows=hits; cur=-1;
-    var html='<div class="sec">'+(isNum?'Mass matches':'Compounds')+'</div>';
-    for(var k=0;k<hits.length;k++){ var h=hits[k];
-      html+='<a class="omni-row" href="/'+esc(h.s)+'"><span class="nm">'+esc(h.t)+'</span><span class="fo">'+sub(esc(h.f))+'</span>'+(h.g?'<span class="kindtag">'+esc(h.g)+'</span>':'')+'<span class="ms">'+(h.m!=null?h.m.toFixed(4):'')+'</span></a>';
-    }
-    pop.innerHTML=html; pop.classList.add('show');
+    function highlight(){ var els=pop.querySelectorAll('.omni-row'); for(var i=0;i<els.length;i++) els[i].classList.toggle('cur', i===cur); if(cur>=0&&els[cur]) els[cur].scrollIntoView({block:'nearest'}); }
+    input.addEventListener('focus', function(){ load().then(function(){ if(input.value) search(input.value); }); });
+    input.addEventListener('input', function(){ if(data) search(input.value); else load().then(function(){ search(input.value); }); });
+    input.addEventListener('keydown', function(e){
+      var els=pop.querySelectorAll('.omni-row');
+      if(e.key==='ArrowDown'){ if(!els.length) return; e.preventDefault(); cur=(cur+1)%els.length; highlight(); }
+      else if(e.key==='ArrowUp'){ if(!els.length) return; e.preventDefault(); cur=(cur-1+els.length)%els.length; highlight(); }
+      else if(e.key==='Enter'){ if(cur>=0&&rows[cur]){ e.preventDefault(); location.href='/'+rows[cur].s; } }
+      else if(e.key==='Escape'){ close(); }
+    });
+    box._omniClose=close;
   }
-  function highlight(){ var els=pop.querySelectorAll('.omni-row'); for(var i=0;i<els.length;i++) els[i].classList.toggle('cur', i===cur); if(cur>=0&&els[cur]) els[cur].scrollIntoView({block:'nearest'}); }
-  input.addEventListener('focus', function(){ load().then(function(){ if(input.value) search(input.value); }); });
-  input.addEventListener('input', function(){ if(data) search(input.value); else load().then(function(){ search(input.value); }); });
-  input.addEventListener('keydown', function(e){
-    var els=pop.querySelectorAll('.omni-row');
-    if(e.key==='ArrowDown'){ if(!els.length) return; e.preventDefault(); cur=(cur+1)%els.length; highlight(); }
-    else if(e.key==='ArrowUp'){ if(!els.length) return; e.preventDefault(); cur=(cur-1+els.length)%els.length; highlight(); }
-    else if(e.key==='Enter'){ if(cur>=0&&rows[cur]){ e.preventDefault(); location.href='/'+rows[cur].s; } }
-    else if(e.key==='Escape'){ close(); }
-  });
-  document.addEventListener('click', function(e){ if(!e.target.closest('.omni')) close(); });
-  document.addEventListener('keydown', function(e){ if((e.metaKey||e.ctrlKey)&&(e.key==='k'||e.key==='K')){ e.preventDefault(); input.focus(); } });
+  boxes.forEach(setup);
+  document.addEventListener('click', function(e){ boxes.forEach(function(b){ if(!b.contains(e.target) && b._omniClose) b._omniClose(); }); });
+  document.addEventListener('keydown', function(e){ if((e.metaKey||e.ctrlKey)&&(e.key==='k'||e.key==='K')){ e.preventDefault(); var i=boxes[0].querySelector('input[type=search]'); if(i) i.focus(); } });
 })();
 </script>`;
 
@@ -114,10 +125,13 @@ export function homePage(pages: PageIndexEntry[]): string {
       <h1 style="font-size:2.6rem">The reference for low-mass spider-venom metabolites.</h1>
       <p class="lead">Fast access to ESI-MS/MS spectra, fragment-ion annotation, and the literature behind the
         structure elucidation, synthesis, and activity of &lt; 1000 Da venom compounds.</p>
-      <form class="hero-search" action="/search" method="get" role="search">
-        ${searchIcon}
-        <input name="q" type="search" placeholder="Serotonin · C23H40N6O5 · 481.31 · Agelenidae" aria-label="Search compounds">
-      </form>
+      <div class="omni" style="max-width:600px">
+        <form class="hero-search" action="/search" method="get" role="search">
+          ${searchIcon}
+          <input name="q" type="search" placeholder="Serotonin · C23H40N6O5 · 481.31 · Agelenidae" autocomplete="off" aria-label="Search compounds">
+        </form>
+        <div class="omni-pop" role="listbox" aria-label="Suggestions"></div>
+      </div>
       <div class="actions"><a class="btn" href="/calc">Open FRIOC calculator &#8599;</a></div>
     </div>
 
@@ -407,11 +421,14 @@ export function searchPage(params: SearchParams, results: SearchResult[], facets
   return `<section class="content">
     <div class="eyebrow">Search &amp; filter</div>
     <h1 style="font-size:2rem;margin:0 0 20px">Find a compound</h1>
-    <form class="omni-input" action="/search" method="get" role="search" style="max-width:640px;margin-bottom:24px">
-      ${searchIcon}
-      <input name="q" type="search" value="${escapeHtml(params.q)}" placeholder="Name, formula, species, family" aria-label="Search">
-      ${hiddenParams(params, ["q"])}
-    </form>
+    <div class="omni" style="max-width:640px;margin-bottom:24px">
+      <form class="omni-input" action="/search" method="get" role="search">
+        ${searchIcon}
+        <input name="q" type="search" value="${escapeHtml(params.q)}" placeholder="Name, formula, species, family" autocomplete="off" aria-label="Search">
+        ${hiddenParams(params, ["q"])}
+      </form>
+      <div class="omni-pop" role="listbox" aria-label="Suggestions"></div>
+    </div>
     <div class="search-layout">
       <aside class="filters">
         <form class="masslookup" action="/search" method="get">
@@ -747,6 +764,98 @@ function formatSnippet(value: string): string {
 
 function formatNumber(value: number): string {
   return value === -1 ? "-" : value.toFixed(5);
+}
+
+export function sitemapXml(pages: PageIndexEntry[], origin: string): string {
+  const paths = ["", "alkaloids", "small-compounds", "structure-elucidation", "calc", "search"];
+  const slugs = pages.filter((page) => page.slug).map((page) => page.slug);
+  const all = [...new Set([...paths, ...slugs])];
+  const urls = all
+    .map((path) => `  <url><loc>${escapeXml(`${origin}/${path}`)}</loc></url>`)
+    .join("\n");
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+}
+
+export function llmsTxt(pages: PageIndexEntry[], origin: string): string {
+  const compounds = pages.filter((page) => page.kind === "compound");
+  const lines = compounds.map((page) => {
+    const meta = [page.formula, page.precursor1 ? `[M+H]+ ${page.precursor1.toFixed(4)}` : "", ...page.family.slice(0, 1)]
+      .filter(Boolean).join(", ");
+    return `- [${page.title}](${origin}/${page.slug})${meta ? `: ${meta}` : ""}`;
+  }).join("\n");
+  return `# venoMS
+
+> A free database of low-molecular-mass compounds (< 1000 Da) found in spider venoms. Provides ESI-MS/MS spectra, fragment-ion annotation, and literature on the structure elucidation, synthesis, and biological activity of venom metabolites. Spider taxonomy follows the World Spider Catalog.
+
+## Browse
+- [Acylpolyamines](${origin}/alkaloids): alkaloidal toxins by acyl head group and polyamine backbone
+- [Small compounds](${origin}/small-compounds): amino acids, biogenic amines, nucleosides, quaternary amines, organic acids
+- [Analytical tools](${origin}/structure-elucidation): fragmentation rules, characteristic fragment ions, method
+
+## Tools
+- [Search](${origin}/search): full-text, faceted (family/level/confidence), and precursor-mass lookup
+- [FRIOC calculator](${origin}/calc): fragment-ion calculator for acylpolyamines
+
+## Compounds
+${lines}
+`;
+}
+
+export function websiteJsonLd(origin: string): string {
+  return jsonLdScript({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "venoMS",
+    description: "Database of low-molecular-mass spider venom metabolites.",
+    url: `${origin}/`,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: { "@type": "EntryPoint", urlTemplate: `${origin}/search?q={query}` },
+      "query-input": "required name=query",
+    },
+  });
+}
+
+export function compoundJsonLd(page: PageIndexEntry, facts: Record<string, string>, origin: string): string {
+  const smiles = fact(facts, "smiles");
+  const inchi = fact(facts, "inchi");
+  const properties = [
+    page.formula && { "@type": "PropertyValue", name: "Molecular formula", value: page.formula },
+    page.precursor1 && { "@type": "PropertyValue", name: "[M+H]+", value: page.precursor1, unitText: "m/z" },
+    page.level && { "@type": "PropertyValue", name: "Structure level", value: page.level },
+    smiles && { "@type": "PropertyValue", name: "SMILES", value: smiles },
+    inchi && { "@type": "PropertyValue", name: "InChI", value: inchi },
+  ].filter(Boolean);
+  const description = [
+    `${page.title}${page.formula ? ` (${page.formula})` : ""}, a low-molecular-mass spider venom metabolite`,
+    page.family.length ? ` detected in ${page.family.slice(0, 6).join(", ")}` : "",
+    ". Data in the venoMS database.",
+  ].join("");
+  return jsonLdScript({
+    "@context": "https://schema.org",
+    "@type": "ChemicalSubstance",
+    name: page.title,
+    url: `${origin}/${page.slug}`,
+    description,
+    ...(page.family.length ? { keywords: page.family.join(", ") } : {}),
+    isPartOf: { "@type": "Dataset", name: "venoMS", url: `${origin}/` },
+    additionalProperty: properties,
+  });
+}
+
+function jsonLdScript(data: unknown): string {
+  // Escape "<" so the JSON can never terminate the <script> element early.
+  const json = JSON.stringify(data).replace(/</g, "\\u003c");
+  return `<script type="application/ld+json">${json}</script>`;
+}
+
+function escapeXml(value: string): string {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&apos;");
 }
 
 export function escapeHtml(value: string): string {

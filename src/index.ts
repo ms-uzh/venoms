@@ -4,13 +4,14 @@ import { marked } from "marked";
 import { fetchTextAsset, loadCalcConfig, loadContentIndex, loadRedirectIndex } from "./assets";
 import { calculate, defaultInput, inputFromForm } from "./calc/calculate";
 import { canonicalPath, parseCompoundRecord, parseMarkdownDocument } from "./content";
-import { calcPage, compoundPage, guidePage, homePage, layout, searchPage, sectionBrowsePage, subclassBrowsePage, type SearchFacet, type SearchResult } from "./html";
+import { calcPage, compoundJsonLd, compoundPage, guidePage, homePage, layout, llmsTxt, searchPage, sectionBrowsePage, sitemapXml, subclassBrowsePage, websiteJsonLd, type SearchFacet, type SearchResult } from "./html";
 import { loadFacets, searchPages, type SearchParams } from "./search";
 import type { ContentIndex, PageIndexEntry } from "./types";
 
 type Bindings = {
   ASSETS: Fetcher;
   DB: D1Database;
+  CF_ANALYTICS_TOKEN?: string;
 };
 
 type AppEnv = {
@@ -28,7 +29,28 @@ marked.setOptions({
 
 app.get("/", async (c) => {
   const index = await loadContentIndex(c.env.ASSETS, c.req.raw);
-  return html(c, "venoMS", homePage(index.pages), "Spider venom metabolite database.", index.pages, cacheHeaders("page"));
+  const origin = new URL(c.req.url).origin;
+  return html(c, "venoMS", homePage(index.pages), "Spider venom metabolite database.", index.pages, cacheHeaders("page"), 200, websiteJsonLd(origin));
+});
+
+app.get("/robots.txt", (c) => {
+  const origin = new URL(c.req.url).origin;
+  // Allow everything except the combinatorial faceted-search URLs (infinite crawl space);
+  // the bare /search page and all compound pages stay indexable.
+  const body = `User-agent: *\nAllow: /\nDisallow: /search?\n\nSitemap: ${origin}/sitemap.xml\n`;
+  return new Response(body, { headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": cacheHeaders("page") } });
+});
+
+app.get("/sitemap.xml", async (c) => {
+  const index = await loadContentIndex(c.env.ASSETS, c.req.raw);
+  const origin = new URL(c.req.url).origin;
+  return new Response(sitemapXml(index.pages, origin), { headers: { "Content-Type": "application/xml; charset=utf-8", "Cache-Control": cacheHeaders("page") } });
+});
+
+app.get("/llms.txt", async (c) => {
+  const index = await loadContentIndex(c.env.ASSETS, c.req.raw);
+  const origin = new URL(c.req.url).origin;
+  return new Response(llmsTxt(index.pages, origin), { headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": cacheHeaders("page") } });
 });
 
 app.get("/search", async (c) => {
@@ -115,15 +137,17 @@ app.get("*", async (c) => {
     }
     const document = parseMarkdownDocument(raw);
     let body: string;
+    let headExtra = "";
     if (page.kind === "compound") {
       const record = parseCompoundRecord(document.body);
       const restHtml = await marked.parse(record.restMarkdown);
       body = compoundPage(page, record, restHtml, index.pages);
+      headExtra = compoundJsonLd(page, record.facts, new URL(c.req.url).origin);
     } else {
       const rendered = await marked.parse(document.body);
       body = guidePage(page, rendered);
     }
-    return html(c, page.title, body, page.description, index.pages, cacheHeaders("page"));
+    return html(c, page.title, body, page.description, index.pages, cacheHeaders("page"), 200, headExtra);
   });
 });
 
@@ -143,9 +167,11 @@ function html(
   navPages: PageIndexEntry[],
   cacheControl: string,
   status = 200,
+  headExtra = "",
 ): Response {
   const currentPath = new URL(c.req.url).pathname;
-  return new Response(layout({ title, body, description, navPages, currentPath }), {
+  const analyticsToken = c.env.CF_ANALYTICS_TOKEN;
+  return new Response(layout({ title, body, description, navPages, currentPath, headExtra, analyticsToken }), {
     status,
     headers: {
       "Cache-Control": cacheControl,

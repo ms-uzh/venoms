@@ -17,6 +17,11 @@
       "database_id": "e8d0a8da-f8b8-4f8b-b694-1a066b063c1c"
     }
   ],
+  "vars": {
+    // Cloudflare Web Analytics beacon token. Get it from the dashboard
+    // (Web Analytics → add site → JS snippet token). Empty = beacon disabled.
+    "CF_ANALYTICS_TOKEN": ""
+  },
   "observability": {
     "enabled": true,
     "head_sampling_rate": 1
