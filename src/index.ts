@@ -3,8 +3,8 @@ import type { Context } from "hono";
 import { marked } from "marked";
 import { fetchTextAsset, loadCalcConfig, loadContentIndex, loadRedirectIndex } from "./assets";
 import { calculate, defaultInput, inputFromForm } from "./calc/calculate";
-import { canonicalPath, parseMarkdownDocument } from "./content";
-import { calcPage, homePage, layout, pageChrome, searchPage, type SearchFacet, type SearchResult } from "./html";
+import { canonicalPath, parseCompoundRecord, parseMarkdownDocument } from "./content";
+import { calcPage, compoundPage, guidePage, homePage, layout, searchPage, sectionBrowsePage, subclassBrowsePage, type SearchFacet, type SearchResult } from "./html";
 import { loadFacets, searchPages, type SearchParams } from "./search";
 import type { ContentIndex, PageIndexEntry } from "./types";
 
@@ -47,8 +47,9 @@ app.get("/search", async (c) => {
     facets = fallbackFacets(index);
   }
 
-  const title = params.q || params.term ? "Search results" : "Search";
-  const body = searchPage(params.q, params.term, activeFilters(params), results, facets);
+  const filtered = params.q || params.mz !== null || params.family.length || params.species.length || params.formula.length || params.level.length || params.confidence.length;
+  const title = filtered ? "Search results" : "Search";
+  const body = searchPage(params, results, facets);
   return html(c, title, body, "Search venoMS compounds, species, formulae, and guide pages.", index.pages, cacheHeaders("search"));
 });
 
@@ -97,6 +98,11 @@ app.get("*", async (c) => {
     return c.redirect(redirect, 301);
   }
 
+  const browse = browseResponse(c, canonical, index);
+  if (browse) {
+    return browse;
+  }
+
   const page = index.pages.find((entry) => `/${entry.slug}` === canonical || (!entry.slug && canonical === "/"));
   if (!page) {
     return c.env.ASSETS.fetch(c.req.raw);
@@ -108,8 +114,16 @@ app.get("*", async (c) => {
       return c.notFound();
     }
     const document = parseMarkdownDocument(raw);
-    const rendered = await marked.parse(document.body);
-    return html(c, page.title, pageChrome(page, rendered), page.description, index.pages, cacheHeaders("page"));
+    let body: string;
+    if (page.kind === "compound") {
+      const record = parseCompoundRecord(document.body);
+      const restHtml = await marked.parse(record.restMarkdown);
+      body = compoundPage(page, record, restHtml, index.pages);
+    } else {
+      const rendered = await marked.parse(document.body);
+      body = guidePage(page, rendered);
+    }
+    return html(c, page.title, body, page.description, index.pages, cacheHeaders("page"));
   });
 });
 
@@ -161,27 +175,49 @@ async function cachedHtml(
   return response;
 }
 
-function searchParams(url: string): SearchParams {
+const BROWSE_TOPS: Record<string, { title: string; base: string }> = {
+  alkaloids: { title: "Acylpolyamines", base: "/alkaloids" },
+  "small-compounds": { title: "Small compounds", base: "/small-compounds" },
+};
+
+function browseResponse(c: AppContext, canonical: string, index: ContentIndex): Response | null {
+  const segments = canonical.split("/").filter(Boolean);
+  const top = segments[0];
+  const meta = top ? BROWSE_TOPS[top] : undefined;
+  if (!meta) {
+    return null;
+  }
+  if (segments.length === 1) {
+    const body = sectionBrowsePage(index.pages, meta.base);
+    return html(c, meta.title, body, `Browse ${meta.title} in venoMS.`, index.pages, cacheHeaders("page"));
+  }
+  if (segments.length === 2) {
+    const body = subclassBrowsePage(index.pages, top, segments[1], meta.title, meta.base);
+    return html(c, meta.title, body, `Browse ${meta.title} compounds in venoMS.`, index.pages, cacheHeaders("page"));
+  }
+  return null;
+}
+
+export function searchParams(url: string): SearchParams {
   const params = new URL(url).searchParams;
+  const values = (key: string): string[] =>
+    params.getAll(key).map((value) => value.trim()).filter(Boolean);
+  const mzRaw = (params.get("mz") || "").trim();
+  const mz = mzRaw && Number.isFinite(Number(mzRaw)) ? Number(mzRaw) : null;
+  const tolValue = Number((params.get("tol") || "").trim());
+  const tol = Number.isFinite(tolValue) && tolValue > 0 ? tolValue : 0.02;
   return {
     q: String(params.get("q") || "").trim(),
     term: String(params.get("term") || "").trim(),
-    family: String(params.get("family") || "").trim(),
-    species: String(params.get("species") || "").trim(),
-    formula: String(params.get("formula") || "").trim(),
-    level: String(params.get("level") || "").trim(),
-    confidence: String(params.get("confidence") || "").trim(),
+    family: values("family"),
+    species: values("species"),
+    formula: values("formula"),
+    level: values("level"),
+    confidence: values("confidence"),
+    mz,
+    tol,
+    sort: String(params.get("sort") || "").trim(),
   };
-}
-
-function activeFilters(params: SearchParams): string[] {
-  return [
-    params.family && `family: ${params.family}`,
-    params.species && `species: ${params.species}`,
-    params.formula && `formula: ${params.formula}`,
-    params.level && `level: ${params.level}`,
-    params.confidence && `confidence: ${params.confidence}`,
-  ].filter(Boolean) as string[];
 }
 
 function isStaticAsset(pathname: string): boolean {
@@ -208,25 +244,30 @@ function cacheHeaders(kind: "page" | "search" | "private"): string {
   return "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400";
 }
 
-function fallbackSearch(index: ContentIndex, params: SearchParams): SearchResult[] {
+export function fallbackSearch(index: ContentIndex, params: SearchParams): SearchResult[] {
   const needle = params.q.toLowerCase();
+  const lo = params.mz !== null ? params.mz - params.tol : 0;
+  const hi = params.mz !== null ? params.mz + params.tol : 0;
   return index.pages
     .filter((page) => {
-      if (params.term && !pageTerms(page).includes(params.term)) {
-        return false;
+      if (params.term && !pageTerms(page).includes(params.term)) return false;
+      if (params.family.length && !params.family.some((value) => page.family.includes(value))) return false;
+      if (params.species.length && !params.species.some((value) => page.species.includes(value))) return false;
+      if (params.formula.length && !params.formula.includes(page.formula)) return false;
+      if (params.level.length && !params.level.includes(page.level)) return false;
+      if (params.confidence.length && !params.confidence.includes(page.confidence)) return false;
+      if (params.mz !== null) {
+        const inRange = (value: number | null) => value !== null && value >= lo && value <= hi;
+        if (!inRange(page.precursor1) && !inRange(page.nominalMass)) return false;
       }
-      if (params.family && !page.family.includes(params.family)) return false;
-      if (params.species && !page.species.includes(params.species)) return false;
-      if (params.formula && page.formula !== params.formula) return false;
-      if (params.level && page.level !== params.level) return false;
-      if (params.confidence && page.confidence !== params.confidence) return false;
       if (!needle) return true;
       return [page.title, page.description, page.bodyText, page.formula, ...page.categories, ...page.tags, ...page.family, ...page.species]
         .join(" ")
         .toLowerCase()
         .includes(needle);
     })
-    .slice(0, 40)
+    .sort(fallbackSort(params.sort))
+    .slice(0, 60)
     .map((page) => ({
       slug: page.slug,
       title: page.title,
@@ -236,7 +277,24 @@ function fallbackSearch(index: ContentIndex, params: SearchParams): SearchResult
       level: page.level,
       confidence: page.confidence,
       snippet: page.description,
+      precursor1: page.precursor1,
+      nominalMass: page.nominalMass,
     }));
+}
+
+function fallbackSort(sort: string): (a: PageIndexEntry, b: PageIndexEntry) => number {
+  switch (sort) {
+    case "mass":
+      return (a, b) => (a.precursor1 ?? Infinity) - (b.precursor1 ?? Infinity);
+    case "mass-d":
+      return (a, b) => (b.precursor1 ?? -Infinity) - (a.precursor1 ?? -Infinity);
+    case "name":
+      return (a, b) => a.title.localeCompare(b.title);
+    case "level":
+      return (a, b) => a.level.localeCompare(b.level) || a.title.localeCompare(b.title);
+    default:
+      return (a, b) => a.kind.localeCompare(b.kind) || a.title.localeCompare(b.title);
+  }
 }
 
 function fallbackFacets(index: ContentIndex): SearchFacet[] {
@@ -244,8 +302,6 @@ function fallbackFacets(index: ContentIndex): SearchFacet[] {
   for (const page of index.pages) {
     for (const [type, values] of [
       ["family", page.family],
-      ["species", page.species],
-      ["formula", page.formula ? [page.formula] : []],
       ["level", page.level ? [page.level] : []],
       ["confidence", page.confidence ? [page.confidence] : []],
     ] as const) {

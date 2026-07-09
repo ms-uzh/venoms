@@ -3,71 +3,119 @@ import type { SearchFacet, SearchResult } from "./html";
 export type SearchParams = {
   q: string;
   term: string;
-  family: string;
-  species: string;
-  formula: string;
-  level: string;
-  confidence: string;
+  family: string[];
+  species: string[];
+  formula: string[];
+  level: string[];
+  confidence: string[];
+  mz: number | null;
+  tol: number;
+  sort: string;
 };
 
+const FACET_TYPES = ["family", "species", "formula", "level", "confidence"] as const;
+
+type Tables = { pages: string; terms: string; fts: string };
+
+let versionCache: { value: string; at: number } | null = null;
+const VERSION_TTL_MS = 60_000;
+
+/**
+ * Resolve the active search version (a content hash) that the Worker should read
+ * from `meta.active_version`, and derive the per-version table names. Cached
+ * briefly per isolate so a promotion propagates within ~a minute. Throws if no
+ * version is active — the caller falls back to the content-index search.
+ */
+async function activeTables(db: D1Database): Promise<Tables> {
+  const now = Date.now();
+  if (!versionCache || now - versionCache.at > VERSION_TTL_MS) {
+    const row = await db.prepare("SELECT value FROM meta WHERE key = 'active_version'").first<{ value: string }>();
+    const value = row?.value ?? "";
+    if (!/^[0-9a-f]{6,64}$/.test(value)) {
+      throw new Error("no active search version");
+    }
+    versionCache = { value, at: now };
+  }
+  const v = versionCache.value;
+  return { pages: `pages_${v}`, terms: `page_terms_${v}`, fts: `pages_fts_${v}` };
+}
+
 export async function searchPages(db: D1Database, params: SearchParams): Promise<SearchResult[]> {
+  const t = await activeTables(db);
   const clauses: string[] = [];
-  const binds: string[] = [];
+  const binds: unknown[] = [];
   const match = ftsQuery(params.q);
 
   if (match) {
-    clauses.push("pages_fts MATCH ?");
+    clauses.push(`${t.fts} MATCH ?`);
     binds.push(match);
   }
 
   if (params.term) {
-    clauses.push("EXISTS (SELECT 1 FROM page_terms t WHERE t.page_slug = p.slug AND t.term_value = ?)");
+    clauses.push(`EXISTS (SELECT 1 FROM ${t.terms} tt WHERE tt.page_slug = p.slug AND tt.term_value = ?)`);
     binds.push(params.term);
   }
 
-  for (const [type, value] of filters(params)) {
-    clauses.push("EXISTS (SELECT 1 FROM page_terms t WHERE t.page_slug = p.slug AND t.term_type = ? AND t.term_value = ?)");
-    binds.push(type, value);
+  for (const type of FACET_TYPES) {
+    const values = params[type];
+    if (!values.length) continue;
+    const placeholders = values.map(() => "?").join(", ");
+    clauses.push(`EXISTS (SELECT 1 FROM ${t.terms} tt WHERE tt.page_slug = p.slug AND tt.term_type = ? AND tt.term_value IN (${placeholders}))`);
+    binds.push(type, ...values);
+  }
+
+  if (params.mz !== null) {
+    const lo = params.mz - params.tol;
+    const hi = params.mz + params.tol;
+    clauses.push("(p.precursor1 BETWEEN ? AND ? OR p.nominal_mass BETWEEN ? AND ?)");
+    binds.push(lo, hi, lo, hi);
   }
 
   const where = clauses.length ? `WHERE ${clauses.join(" AND ")}` : "";
   const snippetExpr = match
-    ? "snippet(pages_fts, 2, '<mark>', '</mark>', '...', 24)"
+    ? `snippet(${t.fts}, 2, '<mark>', '</mark>', '...', 24)`
     : "p.description";
-  const order = match ? "rank" : "p.kind, p.title";
+  const order = orderClause(params.sort, Boolean(match));
 
   const result = await db.prepare(
     `SELECT p.slug, p.title, p.kind, p.description, p.formula, p.level, p.confidence,
+      p.precursor1 AS precursor1, p.nominal_mass AS nominalMass,
       ${snippetExpr} AS snippet
-    FROM pages_fts
-    JOIN pages p ON p.slug = pages_fts.slug
+    FROM ${t.fts}
+    JOIN ${t.pages} p ON p.slug = ${t.fts}.slug
     ${where}
     ORDER BY ${order}
-    LIMIT 40`
+    LIMIT 60`
   ).bind(...binds).all<SearchResult>();
   return result.results || [];
 }
 
 export async function loadFacets(db: D1Database): Promise<SearchFacet[]> {
+  const t = await activeTables(db);
   const result = await db.prepare(
     `SELECT term_type AS type, term_value AS value, count(*) AS count
-    FROM page_terms
-    WHERE term_type IN ('family', 'species', 'formula', 'level', 'confidence')
+    FROM ${t.terms}
+    WHERE term_type IN ('family', 'level', 'confidence')
     GROUP BY term_type, term_value
     ORDER BY count DESC, term_value
-    LIMIT 60`
+    LIMIT 80`
   ).all<SearchFacet>();
   return result.results || [];
 }
 
-function filters(params: SearchParams): Array<[string, string]> {
-  const list: Array<[string, string]> = [];
-  if (params.family) list.push(["family", params.family]);
-  if (params.species) list.push(["species", params.species]);
-  if (params.formula) list.push(["formula", params.formula]);
-  if (params.level) list.push(["level", params.level]);
-  if (params.confidence) list.push(["confidence", params.confidence]);
-  return list;
+function orderClause(sort: string, hasMatch: boolean): string {
+  switch (sort) {
+    case "mass":
+      return "p.precursor1 IS NULL, p.precursor1 ASC";
+    case "mass-d":
+      return "p.precursor1 DESC";
+    case "name":
+      return "p.title COLLATE NOCASE ASC";
+    case "level":
+      return "p.level ASC, p.title COLLATE NOCASE ASC";
+    default:
+      return hasMatch ? "rank" : "p.kind, p.title COLLATE NOCASE";
+  }
 }
 
 function ftsQuery(query: string): string {
