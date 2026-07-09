@@ -672,8 +672,13 @@ export function buildNavModel(pages: PageIndexEntry[]): NavModel {
     for (const family of page.family) {
       const fm = familyMap.get(family) || { count: 0, species: new Set<string>() };
       fm.count += 1;
-      for (const sp of page.species) fm.species.add(sp);
       familyMap.set(family, fm);
+    }
+    // Add each species only under the family it is actually paired with in the
+    // compound's spider-species table (not every family the compound appears in).
+    for (const [sp, fam] of page.speciesFamily ?? []) {
+      const fm = familyMap.get(fam);
+      if (fm) fm.species.add(sp);
     }
   }
 

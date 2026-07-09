@@ -41,6 +41,7 @@ export async function readMarkdownPage(root, filePath, oldSlugByTitle) {
   const confidence = tags.find((term) => /^C-\d/i.test(term)) || tableFacts.confidence || "";
   const formula = tableFacts.formula || categories.find((term) => /^C\d/i.test(term)) || "";
   const nominalMass = Number((categories.find((term) => /^P\d+(\.\d+)?$/i.test(term)) || "").slice(1)) || null;
+  const speciesFamily = extractSpeciesFamily(parsed.body);
 
   return {
     slug,
@@ -57,9 +58,33 @@ export async function readMarkdownPage(root, filePath, oldSlugByTitle) {
     precursor1: tableFacts.precursor1,
     family,
     species,
+    speciesFamily,
     level,
     confidence,
   };
+}
+
+// Parse the "## Spider species" table into [species, family] pairs. The two flat
+// `family` / `species` lists lose the pairing (a compound found in several venoms
+// mixes families and species), so the taxonomy tree needs the row-level pairs.
+function extractSpeciesFamily(markdown) {
+  const pairs = [];
+  let inTable = false;
+  for (const line of markdown.split("\n")) {
+    if (!line.includes("|")) { inTable = false; continue; }
+    const cells = line.split("|").map((cell) => cell.trim());
+    if (cells[0] === "") cells.shift();
+    if (cells[cells.length - 1] === "") cells.pop();
+    if (cells.length < 2) continue;
+    const head0 = cells[0].toLowerCase();
+    if (head0 === "spider species" && cells[1].toLowerCase() === "family") { inTable = true; continue; }
+    if (!inTable) continue;
+    if (/^:?-+:?$/.test(cells[0])) continue; // separator row
+    const species = cells[0];
+    const family = cells[1];
+    if (species && family) pairs.push([species, family]);
+  }
+  return pairs;
 }
 
 export function parseMarkdownDocument(raw) {

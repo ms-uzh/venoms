@@ -13,6 +13,8 @@ export type PageIndexEntry = {
   precursor1: number | null;
   family: string[];
   species: string[];
+  /** Row-level [species, family] pairs from the compound's spider-species table. */
+  speciesFamily?: Array<[string, string]>;
   level: string;
   confidence: string;
 };
