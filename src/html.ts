@@ -585,10 +585,10 @@ export function calcPage(config: CalcConfig, input: CalculationInput, result: Ca
           <div class="calc-section-head">Tail</div>
           <div class="calc-form single">${select("tail", "Tail group", config.tails.map((item) => item.name), input.tail)}</div>
         </section>
-        <section class="calc-section">
-          <div class="calc-section-head">Co-eluting spiders <span>optional</span></div>
+        ${result ? `<section class="calc-section">
+          <div class="calc-section-head">Co-eluting spiders <span>optional — fills the generated entry below</span></div>
           <div class="calc-form spiders">${spiderSelects}</div>
-        </section>
+        </section>` : ""}
       </div>
       <div style="margin-top:18px"><button type="submit">Calculate</button></div>
     </form>
