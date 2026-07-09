@@ -1,7 +1,7 @@
 +++
 title = "Histidine"
 categories = ["C6H9N3O2","P156","HDX161",
-"Cupiennius"]
+"Ctenidae"]
 tags = ["S-1","C-1",
 "Cupiennius salei"]
 +++
@@ -61,6 +61,6 @@ tags = ["S-1","C-1",
 
 | Spider species   | Family     | Discovered             |
 |------------------|------------|------------------------|
-| Cupiennius salei | Cupiennius | 1994 / L. Kuhn-Nentwig |
+| Cupiennius salei | Ctenidae   | 1994 / L. Kuhn-Nentwig |
 
 ## Comments

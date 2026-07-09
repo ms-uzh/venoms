@@ -81,8 +81,7 @@ app.get("/calc", async (c) => {
     loadCalcConfig(c.env.ASSETS, c.req.raw),
   ]);
   const input = defaultInput(config);
-  const result = calculate(config, input);
-  return html(c, "FRIOC Calculator", calcPage(config, input, result), "FRIOC calculator for acylpolyamine names, formulae, masses, and fragments.", index.pages, cacheHeaders("page"));
+  return html(c, "FRIOC Calculator", calcPage(config, input, null), "FRIOC calculator for acylpolyamine names, formulae, masses, and fragments.", index.pages, cacheHeaders("page"));
 });
 
 app.post("/calc", async (c) => {

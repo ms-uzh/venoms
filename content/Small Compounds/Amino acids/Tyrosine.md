@@ -1,7 +1,7 @@
 +++
 title = "Tyrosine"
 categories = ["C9H11NO3","P182","HDX187",
-"Araneidae","Cupiennius","Pholcidae","Sparassidae"]
+"Araneidae","Ctenidae","Pholcidae","Sparassidae"]
 tags= ["S-1","C-1",
 "Cupiennius salei","Heteropoda davidbowie","Parawixia bistriata","Physocyclus mexicanus"]
 +++
@@ -71,7 +71,7 @@ tags= ["S-1","C-1",
 
 | Spider species   | Family     | Discovered             |
 |------------------|------------|------------------------|
-| Cupiennius salei | Cupiennius | 1994 / L. Kuhn-Nentwig |
+| Cupiennius salei | Ctenidae   | 1994 / L. Kuhn-Nentwig |
 | Heteropoda davidbowie | Sparassidae | 2020 / Y. M. Forster |
 | Parawixia bistriata | Araneidae | 2020 / Y. M. Forster |
 | Physocyclus mexicanus | Pholcidae | 2020 / Y. M. Forster |

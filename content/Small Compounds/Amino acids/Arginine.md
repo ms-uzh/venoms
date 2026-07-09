@@ -1,7 +1,7 @@
 +++
 title = "Arginine"
 categories = ["C6H14N4O2","P175","HDX183",
-"Araneidae","Cupiennius","Eresidae","Gnaphosidae","Lycosidae","Oxyopidae","Pholcidae","Segestriidae","Sparassidae","Theridiidae"]
+"Araneidae","Ctenidae","Eresidae","Gnaphosidae","Lycosidae","Oxyopidae","Pholcidae","Segestriidae","Sparassidae","Theridiidae"]
 tags = ["S-1","C-1",
 "Alopecosa sp.","Ariadna sp.","Cupiennius salei","Desertosa sp.","Drassodes sp.","Eresus sp.","Geolycosa sp.","Heteropoda davidbowie","Hippocosa sp.","Lycosa praegrandis","Lycosa sp.","Parawixia bistriata","Peucetia viridans","Physocyclus mexicanus","Steatoda grossa","Stegodyphus sp."]
 +++
@@ -92,7 +92,7 @@ tags = ["S-1","C-1",
 |------------------|------------|------------------------|
 | Alopecosa sp. | Lycosidae | 2020 / Y. M. Forster |
 | Ariadna sp. | Segestriidae | 2020 / Y. M. Forster |
-| Cupiennius salei | Cupiennius | 1994 / L. Kuhn-Nentwig |
+| Cupiennius salei | Ctenidae   | 1994 / L. Kuhn-Nentwig |
 | Desertosa sp. | Lycosidae | 2020 / Y. M. Forster |
 | Drassodes sp. | Gnaphosidae | 2020 / Y. M. Forster |
 | Eresus sp. | Eresidae | 2020 / Y. M. Forster |

@@ -1,7 +1,7 @@
 +++
 title = "Serine"
 categories = ["C3H7NO3","P106","HDX111",
-"Cupiennius","Theridiidae"]
+"Ctenidae","Theridiidae"]
 tags = ["S-1","C-1",
 "Cupiennius salei","Latrodectus mactans"]
 +++
@@ -60,7 +60,7 @@ tags = ["S-1","C-1",
 
 | Spider species   | Family     | Discovered             |
 |------------------|------------|------------------------|
-| Cupiennius salei | Cupiennius | 1994 / L. Kuhn-Nentwig |
+| Cupiennius salei | Ctenidae   | 1994 / L. Kuhn-Nentwig |
 | Latrodectus mactans | Theridiidae | 2020 / Y. M. Forster |
 
 ## Comments

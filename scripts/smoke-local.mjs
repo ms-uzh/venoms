@@ -17,7 +17,7 @@ const checks = [
   { path: "/search?level=S-3", status: 200, includes: "S-3" },
   { path: "/search?confidence=C-1", status: 200, includes: "C-1" },
   { path: "/search?mz=481.31&tol=0.02", status: 200, includes: "PhAcAsn3(Me)43" },
-  { path: "/calc", status: 200, includes: "Prop3334Gu" },
+  { path: "/calc", status: 200, includes: "Polyamine units" },
   { path: "/img_MSMS/177_Serotonin.png", status: 200, contentType: "image/" },
   { path: "/pdf/177_Serotonin_4-31.pdf", status: 200, contentType: "application/pdf" },
   { path: "/calc/", status: 301, location: "/calc" },

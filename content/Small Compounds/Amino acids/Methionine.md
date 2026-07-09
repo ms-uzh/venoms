@@ -1,7 +1,7 @@
 +++
 title = "Methionine"
 categories = ["C5H11NO2S","P150","HDX154",
-"Cupiennius","Lycosidae"]
+"Ctenidae","Lycosidae"]
 tags = ["S-1","C-3",
 "Cupiennius salei","Lycosa indagatrix"]
 +++
@@ -55,7 +55,7 @@ tags = ["S-1","C-3",
 
 | Spider species    | Family     | Discovered                 |
 |-------------------|------------|----------------------------|
-| Cupiennius salei  | Cupiennius | 1994 / L. Kuhn-Nentwig     |
+| Cupiennius salei  | Ctenidae   | 1994 / L. Kuhn-Nentwig     |
 | Lycosa indagatrix | Lycosidae  | 1988 / G. Ridling Margaret |
 
 ## Comments

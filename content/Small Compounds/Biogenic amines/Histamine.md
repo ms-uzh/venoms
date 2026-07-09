@@ -1,7 +1,7 @@
 +++
 title = "Histamine"
 categories = ["C5H9N3","P112","HDX116",
-"Araneidae","Cheiracanthiidae","Ctenidae","Cupiennius","Lamponidae","Lycosidae","Oxyopidae","Salticidae","Sicariidae","Sparassidae","Theraphosidae"]
+"Araneidae","Cheiracanthiidae","Ctenidae","Ctenidae","Lamponidae","Lycosidae","Oxyopidae","Salticidae","Sicariidae","Sparassidae","Theraphosidae"]
 tags = ["S-1","C-1",
 "Alopecosa sp.",
 "Cheiracanthium japonicum","Cupiennius salei","Cyriopagopus lividum",
@@ -96,7 +96,7 @@ tags = ["S-1","C-1",
 |--------------------------|------------------|----------------------------|
 | Alopecosa sp. | Lycosidae | 2020 / Y. M. Forster |
 | Cheiracanthium japonicum | Cheiracanthiidae | 1991 / K. Hagiwara         |
-| Cupiennius salei         | Cupiennius       | 1994 / L. Kuhn-Nentwig     |
+| Cupiennius salei         | Ctenidae         | 1994 / L. Kuhn-Nentwig     |
 | Cyriopagopus lividum     | Theraphosidae    | 2008 / F. C. Schroeder     |
 | Desertosa sp. | Lycosidae | 2020 / Y. M. Forster |
 | Eusparassus oculatus     | Sparassidae      | 2008 / F. C. Schroeder     |

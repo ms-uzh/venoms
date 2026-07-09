@@ -42,9 +42,9 @@ export type CalculationResult = {
 
 export function defaultInput(config: CalcConfig): CalculationInput {
   return {
-    head: findUnit(config.heads, "Prop").name,
-    polyamines: ["3", "3", "3", "4", ...Array(Math.max(0, (config.app.maxPolyamineSelectors || 10) - 4)).fill("-")],
-    tail: findUnit(config.tails, "Gu").name,
+    head: "-",
+    polyamines: Array(config.app.maxPolyamineSelectors || 10).fill("-"),
+    tail: "-",
     spiders: ["-", "-", "-"],
   };
 }

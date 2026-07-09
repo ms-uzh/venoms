@@ -1,7 +1,7 @@
 +++
 title = "Glutamic acid"
 categories = ["C5H9NO4","P148","HDX153",
-"Araneidae","Cupiennius","Ctenidae","Cyrtaucheniidae","Eresidae","Gnaphosidae","Lycosidae","Nemesiidae","Oxyopidae","Philodromidae","Pisauridae","Plectreuridae","Segestriidae","Sparassidae","Theraphosidae","Titanoecidae","Zodariidae"]
+"Araneidae","Ctenidae","Ctenidae","Cyrtaucheniidae","Eresidae","Gnaphosidae","Lycosidae","Nemesiidae","Oxyopidae","Philodromidae","Pisauridae","Plectreuridae","Segestriidae","Sparassidae","Theraphosidae","Titanoecidae","Zodariidae"]
 tags = ["S-1","C-1",
 "Acanthoscurria paulensis","Alopecosa sp.","Anemesia incana","Aphonopelma californicum","Aphonopelma hentzi","Araneus gemma","Araneus diadematus","Araneus sp.","Araneus tartaricus","Ariadna sp.","Avicularia avicularia","Avicularia vellutinum*",
 "Cupiennius salei","Cyriopagopus albostriatum","Cyriopagopus lividum","Cyriopagopus schmidti",
@@ -125,7 +125,7 @@ tags = ["S-1","C-1",
 | Ariadna sp. | Segestriidae | 2020 / Y. M. Forster |
 | Avicularia avicularia             | Theraphosidae   | 2008 / F. C. Schroeder     |
 | Avicularia vellutinum*              | Theraphosidae   | 1957 / F. G. Fischer       |
-| Cupiennius salei                  | Cupiennius      | 1994 / L. Kuhn-Nentwig     |
+| Cupiennius salei                  | Ctenidae        | 1994 / L. Kuhn-Nentwig     |
 | Cyriopagopus albostriatum         | Theraphosidae   | 2008 / F. C. Schroeder     |
 | Cyriopagopus lividum              | Theraphosidae   | 2008 / F. C. Schroeder     |
 | Cyriopagopus schmidti             | Theraphosidae   | 2008 / F. C. Schroeder     |
