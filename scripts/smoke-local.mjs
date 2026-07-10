@@ -7,6 +7,7 @@ const checks = [
   { path: "/contact", status: 200, includes: "Contact us" },
   { path: "/alkaloids/prop/prop3334gu", status: 200, includes: "Prop3334Gu" },
   { path: "/small-compounds/biogenic-amines/serotonin", status: 200, includes: "Serotonin" },
+  { path: "/alkaloids/24-oh-phac/24-oh-phacasn34ßala3", status: 200, includes: "Asn34ßAla3" },
   { path: "/structure-elucidation/fragmentation-rules", status: 200, includes: "Fragmentation" },
   { path: "/search?q=serotonin", status: 200, includes: "Serotonin" },
   { path: "/search?q=C17H39N7O", status: 200, includes: "Prop3334Gu" },

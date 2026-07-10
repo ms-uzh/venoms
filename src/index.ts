@@ -97,7 +97,9 @@ app.post("/calc", async (c) => {
 
 app.get("*", async (c) => {
   const requestUrl = new URL(c.req.url);
-  const pathname = requestUrl.pathname;
+  // Slugs may contain non-ASCII characters (e.g. "ß" in ßAla compounds); URL.pathname
+  // returns them percent-encoded, so decode before matching against the decoded slugs.
+  const pathname = safeDecodePath(requestUrl.pathname);
 
   if (isStaticAsset(pathname)) {
     return c.env.ASSETS.fetch(c.req.raw);
@@ -246,6 +248,14 @@ export function searchParams(url: string): SearchParams {
     tol,
     sort: String(params.get("sort") || "").trim(),
   };
+}
+
+function safeDecodePath(pathname: string): string {
+  try {
+    return decodeURIComponent(pathname);
+  } catch {
+    return pathname;
+  }
 }
 
 function isStaticAsset(pathname: string): boolean {
