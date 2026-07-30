@@ -1,7 +1,7 @@
 +++
 title = "Glycine"
 categories = ["C2H5NO2","P76","HDX80",
-"Atracidae","Cupiennius"]
+"Atracidae","Ctenidae"]
 tags = ["S-1","C-4",
 "Atrax robustus","Cupiennius salei"]
 +++
@@ -56,6 +56,6 @@ tags = ["S-1","C-4",
 | Spider species   | Family     | Discovered             |
 |------------------|------------|------------------------|
 | Atrax robustus   | Atracidae  | 1979 / P. H. Duffield  |
-| Cupiennius salei | Cupiennius | 1994 / L. Kuhn-Nentwig |
+| Cupiennius salei | Ctenidae   | 1994 / L. Kuhn-Nentwig |
 
 ## Comments

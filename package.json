@@ -1,0 +1,44 @@
+{
+  "name": "venoms-workers",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run prepare:assets && wrangler dev --local --persist-to .wrangler/state",
+    "types": "wrangler types",
+    "build": "npm run types && npm run prepare:assets && tsc --noEmit && wrangler deploy --dry-run --outdir dist",
+    "ci": "npm run types && npm run prepare:assets && npm run validate && npm test && tsc --noEmit && wrangler deploy --dry-run --outdir dist",
+    "prepare:assets": "npm run calc:data && npm run content:index && npm run suggest && npm run redirects && npm run content:sync",
+    "content:sync": "node scripts/sync-content-assets.mjs",
+    "content:index": "node scripts/build-content-index.mjs",
+    "legacy:taxonomy": "npm run content:index && node scripts/snapshot-legacy-taxonomy.mjs",
+    "suggest": "node scripts/build-suggest-index.mjs",
+    "redirects": "node scripts/build-redirects.mjs",
+    "calc:data": "node scripts/generate-calc-data.mjs",
+    "search:index": "node scripts/build-search-index.mjs",
+    "seed:version": "node scripts/seed-version.mjs",
+    "deploy:build": "npm run types && npm run prepare:assets && npm run validate && npm test && tsc --noEmit && npm run search:index && npx wrangler d1 migrations apply venoms-search --remote && node scripts/seed-version.mjs --no-promote",
+    "deploy:production": "node scripts/deploy-production.mjs",
+    "check:search-version": "node scripts/check-search-version.mjs",
+    "verify:deploy": "SMOKE_BASE_URL=${SMOKE_BASE_URL:-https://venoms.rootd.workers.dev} npm run smoke && npm run check:search-version",
+    "deploy:preview": "wrangler versions upload",
+    "db:migrate": "wrangler d1 migrations apply venoms-search --local",
+    "db:seed": "npm run prepare:assets && npm run search:index && node scripts/seed-version.mjs --local --promote",
+    "setup:local": "npm run types && npm run db:migrate && npm run db:seed",
+    "validate": "node scripts/validate-content.mjs",
+    "test": "vitest run",
+    "smoke": "node scripts/smoke-local.mjs"
+  },
+  "dependencies": {
+    "hono": "^4.8.4",
+    "marked": "^13.0.3",
+    "smol-toml": "^1.4.2",
+    "yaml": "^2.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "typescript": "^5.8.3",
+    "vitest": "^4.1.10",
+    "wrangler": "^4.107.1"
+  }
+}

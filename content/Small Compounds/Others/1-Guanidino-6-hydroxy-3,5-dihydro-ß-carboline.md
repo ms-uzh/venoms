@@ -52,7 +52,7 @@ tags = ["S-4","C-4",
 
 ## Spider species
 
-| Spider species      | familiy   | Discovered              |
+| Spider species      | Family    | Discovered              |
 |---------------------|-----------|-------------------------|
 | Parawixia bistriata | Araneidae | 2009 / D. M. Saidemberg |
 

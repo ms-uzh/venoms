@@ -67,7 +67,7 @@ tags = ["S-1","C-1"]
 
 ## Spider species
 
-| Spider species      | Familiy   | Discovered         |
+| Spider species      | Family    | Discovered         |
 |---------------------|-----------|-----------------------|
 |  |  |  |
 

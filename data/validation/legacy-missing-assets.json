@@ -1,0 +1,740 @@
+{
+  "note": "Legacy content references that were already missing when the Workers migration validator was introduced. New missing assets fail validation.",
+  "assets": [
+    {
+      "reference": "/img_MSMS/220_Pantothenic_acid.png",
+      "files": [
+        "content/Small Compounds/Organic acids/Pantothenic acid.md"
+      ]
+    },
+    {
+      "reference": "/img/2-Sulfated_guanosine.png",
+      "files": [
+        "content/Small Compounds/Nucleosides & Nucleotides/2'-Sulfated guanosine.md"
+      ]
+    },
+    {
+      "reference": "/img/Glutamic_acid_5-methylester.png",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid 5-methylester.md"
+      ]
+    },
+    {
+      "reference": "/img/Trp3(OH)334Gu.png",
+      "files": [
+        "content/Alkaloids/Trp/Trp3(OH)334Gu.md"
+      ]
+    },
+    {
+      "reference": "/pdf/132_Isoeucine_2-65.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Isoleucine.md"
+      ]
+    },
+    {
+      "reference": "/pdf/162_Glutamic_acid_5-methylester_1-44.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid 5-methylester.md"
+      ]
+    },
+    {
+      "reference": "/pdf/348_AMP_1-42.pdf",
+      "files": [
+        "content/Small Compounds/Nucleosides & Nucleotides/AMP.md"
+      ]
+    },
+    {
+      "reference": "/pdf/417_IndAc3343_7-82_2.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc3433.md"
+      ]
+    },
+    {
+      "reference": "/pdf/417_IndAc3343_7-82.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc3433.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-aperta/335_4-OH-IndAc3(OH)4_4-OH-IndAc4(OH)3_Aa_HDX.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)4.md",
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc4(OH)3.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-aperta/335_4-OH-IndAc3(OH)4_4-OH-IndAc4(OH)3_Aa.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)4.md",
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc4(OH)3.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-aperta/392_IndAc4(OH)3(OH)3_Aa-HDX.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc4(OH)3(OH)3.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-aperta/417_IndAc3334_IndAc3343_IndAc3433_Aa_HDX.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc3334.md",
+        "content/Alkaloids/IndAc/IndAc3343.md",
+        "content/Alkaloids/IndAc/IndAc3433.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-aperta/522_IndAc3(OH)3(OH)343_Aa_2.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)3(OH)343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-aperta/522_IndAc3(OH)3(OH)343_Aa_HDX.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)3(OH)343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-aperta/522_IndAc3(OH)3(OH)343_Aa.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)3(OH)343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-orientalis/244_Cytidine_Ao.pdf",
+      "files": [
+        "content/Small Compounds/Nucleosides & Nucleotides/Cytidine.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-potteri/2-5-OH2-Bz343_Ap_HDX.pdf",
+      "files": [
+        "content/Alkaloids/2,5-(OH)₂-Bz/2,5-(OH)₂-Bz343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-potteri/2-5-OH2-Bz343_Ap.pdf",
+      "files": [
+        "content/Alkaloids/2,5-(OH)₂-Bz/2,5-(OH)₂-Bz343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-potteri/305_IndAc3(OH)3_Ap_HDX.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc3(OH)3.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-potteri/323_4-OH-Bz433_Ap_HDX.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-Bz/4-OH-Bz433.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-potteri/348_PA3(OH)3(OH)35(NMe3)_Ap.pdf",
+      "files": [
+        "content/Alkaloids/Free polyamines (PA)/PA3(OH)3(OH)35(NMe3).md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-potteri/396_2-5-OH2-Bz3334_2-5-OH2-Bz3343_Ap_HDX.pdf",
+      "files": [
+        "content/Alkaloids/2,5-(OH)₂-Bz/2,5-(OH)₂-Bz3334.md",
+        "content/Alkaloids/2,5-(OH)₂-Bz/2,5-(OH)₂-Bz3343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-potteri/417_IndAc3334_Ap_HDX.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc3334.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-potteri/451_4-OH-IndAc3(OH)3(OH)33_Ap.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)3(OH)33.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-potteri/465_4-OH-IndAc3(OH)3(OH)34_Ap_2.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)3(OH)34.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-potteri/465_4-OH-IndAc3(OH)3(OH)34_Ap.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)3(OH)34.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-potteri/506_IndAc3(OH)3(OH)343_Ap_HDX.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc3(OH)3(OH)343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-potteri/522_IndAc3(OH)3(OH)343_Ap_2.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)3(OH)343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-potteri/522_IndAc3(OH)3(OH)343_Ap_HDX.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)3(OH)343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-potteri/522_IndAc3(OH)3(OH)343_Ap.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)3(OH)343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-potteri/526_2-5-OH2-Bz3(OH)33433_Ap_2.pdf",
+      "files": [
+        "content/Alkaloids/2,5-(OH)₂-Bz/2,5-(OH)₂-Bz3(OH)33433.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-potteri/526_2-5-OH2-Bz3(OH)33433_Ap.pdf",
+      "files": [
+        "content/Alkaloids/2,5-(OH)₂-Bz/2,5-(OH)₂-Bz3(OH)33433.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-robustus/245_Ar343_Ar_HDX.pdf",
+      "files": [
+        "content/Alkaloids/Ac/Ac343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/A-robustus/245_Ar343_Ar.pdf",
+      "files": [
+        "content/Alkaloids/Ac/Ac343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Alopecosa-sp1/104_Choline_Al-sp1.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Aspartic acid.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Alopecosa-sp4/154_N-acetylhystamine_Al-sp4.pdf",
+      "files": [
+        "content/Small Compounds/Biogenic amines/N-Acetylhistamine.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Alopecosa-sp4/162_Glutamic-acid_5-methylester_Al-sp4.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid 5-methylester.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Alopecosa-sp5/154_N-acetylhystamine_Al-sp5.pdf",
+      "files": [
+        "content/Small Compounds/Biogenic amines/N-Acetylhistamine.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Alopecosa-sp5/162_Glutamic-acid_5-methylester_Al-sp5.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid 5-methylester.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Ariadna-sp/203_PA343_Ar-sp_HDX.pdf",
+      "files": [
+        "content/Alkaloids/Free polyamines (PA)/PA343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Ariadna-sp/376_IndAc4(OH)33_Ar-sp_HDX.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc4(OH)33.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Ariadna-sp/433_IndAc3(OH)343_Ar-sp_HDX.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc3(OH)343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Ariadna-sp/449_IndAc4(OH)3(OH)33_Ar-sp_HDX.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc4(OH)3(OH)33.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Ariadna-sp/489_IndAc3(OH)335(NMe3)_Ar-sp_HDX.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc3(OH)335(NMe₃)⁺_3.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Ariadna-sp/490_IndAc3(OH)3343_Ar-sp_HDX.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc3(OH)3343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/D-canities/154_N-acetylhystamine_Dc.pdf",
+      "files": [
+        "content/Small Compounds/Biogenic amines/N-Acetylhistamine.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Desertosa-sp3/154_N-acetylhystamine_De-sp3.pdf",
+      "files": [
+        "content/Small Compounds/Biogenic amines/N-Acetylhistamine.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Desertosa-sp3/162_Glutamic-acid_5-methylester_De-sp3.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid 5-methylester.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Drassodes-sp1/162_Glutamic-acid_5-methylester_Dr-sp1.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid 5-methylester.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Drassodes-sp1/239_2-5-OH2-Bz5_Dr-sp1.pdf",
+      "files": [
+        "content/Alkaloids/2,5-(OH)₂-Bz/2,5-(OH)₂-Bz5.md"
+      ]
+    },
+    {
+      "reference": "/pdf/E-agrestis/380_4-OH-Bz3334_4-OH-Bz3343_Ea_2.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-Bz/4-OH-Bz3334.md",
+        "content/Alkaloids/4-OH-Bz/4-OH-Bz3343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/E-agrestis/380_4-OH-Bz4333_Ea_2.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-Bz/4-OH-Bz4333.md"
+      ]
+    },
+    {
+      "reference": "/pdf/E-agrestis/452_OH-OMe-Bz3334Gu_Ea_HDX.pdf",
+      "files": [
+        "content/Alkaloids/OH-OMe-Bz/OH-OMe-Bz3334Gu.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Eresus-sp2/162_Glutamic-acid_5-methylester_Er-sp2.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid 5-methylester.md"
+      ]
+    },
+    {
+      "reference": "/pdf/H-caroliensis/148_Glutamic-acid_Hc_HDX.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid.md"
+      ]
+    },
+    {
+      "reference": "/pdf/H-curta/1449_IndAc3(OH)3(OH)34_Hc_HDX.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc3(OH)3(OH)34.md"
+      ]
+    },
+    {
+      "reference": "/pdf/H-curta/1449_IndAc3(OH)3(OH)34_Hc.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc3(OH)3(OH)34.md"
+      ]
+    },
+    {
+      "reference": "/pdf/H-curta/244_Cytidine_Ap_HDX.pdf",
+      "files": [
+        "content/Small Compounds/Nucleosides & Nucleotides/Cytidine.md"
+      ]
+    },
+    {
+      "reference": "/pdf/H-curta/244_Cytidine_Ap.pdf",
+      "files": [
+        "content/Small Compounds/Nucleosides & Nucleotides/Cytidine.md"
+      ]
+    },
+    {
+      "reference": "/pdf/H-curta/260_PA3334_PA3343_Hc.pdf",
+      "files": [
+        "content/Alkaloids/Free polyamines (PA)/PA3334.md",
+        "content/Alkaloids/Free polyamines (PA)/PA3343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/H-curta/350_Phe334_Phe334_Hc_HDX.pdf",
+      "files": [
+        "content/Alkaloids/Phe/Phe334.md",
+        "content/Alkaloids/Phe/Phe343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/H-curta/358_Ac3335(NMe3)_Hc.pdf",
+      "files": [
+        "content/Alkaloids/Ac/Ac3335(NMe₃)⁺_3.md"
+      ]
+    },
+    {
+      "reference": "/pdf/H-curta/417_IndAc3334_IndAc3343_IndAc3433_Hc.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc3334.md",
+        "content/Alkaloids/IndAc/IndAc3343.md",
+        "content/Alkaloids/IndAc/IndAc3433.md"
+      ]
+    },
+    {
+      "reference": "/pdf/H-curta/452_2-5-OH2-Bz3335(NMe3)_Hc_.pdf",
+      "files": [
+        "content/Alkaloids/2,5-(OH)₂-Bz/2,5-(OH)₂-Bz3335(NMe₃)⁺_3.md"
+      ]
+    },
+    {
+      "reference": "/pdf/H-curta/465_4-OH-IndAc4(OH)3(OH)33_2_Hc.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc4(OH)3(OH)33.md"
+      ]
+    },
+    {
+      "reference": "/pdf/H-curta/522_IndAc3(OH)3(OH)343_Hc_HDX.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)3(OH)343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/H-curta/522_IndAc3(OH)3(OH)343_Hc.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)3(OH)343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/H-davidbowie/162_Glutamic-acid_5-methylester_Hd.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid 5-methylester.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hippocosa-sp1/154_N-acetylhystamine_Hi-sp1.pdf",
+      "files": [
+        "content/Small Compounds/Biogenic amines/N-Acetylhistamine.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hippocosa-sp1/162_Glutamic-acid_5-methylester_Hi-sp1.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid 5-methylester.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/245_Ar343_Ho-sp_HDX.pdf",
+      "files": [
+        "content/Alkaloids/Ac/Ac343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/245_Ar343_Ho-sp.pdf",
+      "files": [
+        "content/Alkaloids/Ac/Ac343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/350_Phe334_Phe334_Ho-sp_HDX.pdf",
+      "files": [
+        "content/Alkaloids/Phe/Phe334.md",
+        "content/Alkaloids/Phe/Phe343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/350_Phe334_Phe334_Ho-sp.pdf",
+      "files": [
+        "content/Alkaloids/Phe/Phe334.md",
+        "content/Alkaloids/Phe/Phe343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/374_IndAc533_Ho-sp_2.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc533.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/374_IndAc533_Ho-sp.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc533.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/392_4-OH-IndAc3(OH)34_IndAc3(OH)43_Ho-sp_HDX.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)43.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/392_IndAc3(OH)34_Ho-sp.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)34.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/392_IndAc3(OH)34_IndAc3(OH)43_Ho-sp_HDX.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)34.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/433_IndAc4(OH)333_Ho-sp_2.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc4(OH)333.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/453_2-5-OH2-Bz33343_Ho-sp_HDX.pdf",
+      "files": [
+        "content/Alkaloids/2,5-(OH)₂-Bz/2,5-(OH)₂-Bz33343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/473_IndAc3335(NMe3)_Ho-sp_HDX.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc3335(NMe₃)⁺_3.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/489_IndAc3(OH)335(NMe3)_Ho-sp-HDX.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc3(OH)335(NMe₃)⁺_3.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/522_IndAc3(OH)3(OH)343_Ho-sp_2.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)3(OH)343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/522_IndAc3(OH)3(OH)343_Ho-sp_HDX.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)3(OH)343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/522_IndAc3(OH)3(OH)343_Ho-sp.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)3(OH)343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/H-curta/506_IndAc3(OH)3(OH)343_Ho-sp_2.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc3(OH)3(OH)343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/H-curta/506_IndAc3(OH)3(OH)343_Ho-sp_HDX.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc3(OH)3(OH)343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Hololena-sp/H-curta/506_IndAc3(OH)3(OH)343_Ho-sp.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc3(OH)3(OH)343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/L-cornutus/148_Glutamic-acid_Lc_HDX.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid.md"
+      ]
+    },
+    {
+      "reference": "/pdf/L-praegrandis/154_N-acetylhystamine_Lp.pdf",
+      "files": [
+        "content/Small Compounds/Biogenic amines/N-Acetylhistamine.md"
+      ]
+    },
+    {
+      "reference": "/pdf/L-praegrandis/162_Glutamic-acid_5-methylester_Lp.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid 5-methylester.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Lycosa-sp1/162_Glutamic-acid_5-methylester_Ly-sp1.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid 5-methylester.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Lycosa-sp3/104_Choline_Ly-sp3.pdf",
+      "files": [
+        "content/Small Compounds/Biogenic amines/Tyramine.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Lycosa-sp3/162_Glutamic-acid_5-methylester_Ly-sp3.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid 5-methylester.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Lycosa-sp4/104_Choline_Ly-sp4.pdf",
+      "files": [
+        "content/Small Compounds/Biogenic amines/Tyramine.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Lycosa-sp4/162_Glutamic-acid_5-methylester_Ly-sp4.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid 5-methylester.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Lycosa-sp5/162_Glutamic-acid_5-methylester_Ly-sp5.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid 5-methylester.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-bistriata/359_4-OH-IndAc3(Me2)4(NMe2)_Pb_HDX.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(Me₂)4(NMe₂)⁺_2.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-bistriata/359_4-OH-IndAc3(Me2)4(NMe2)_Pb.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(Me₂)4(NMe₂)⁺_2.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-bistriata/566_2-4-OH2-PhAcAsn43Arg_Pb_HDX.pdf",
+      "files": [
+        "content/Alkaloids/2,4-(OH)₂-PhAc/2,4-(OH)₂-PhAcAsn43Arg.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-bistriata/745_4-OH-IndAcAsn4Lys(Me2)3Arg_Pb_2.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAcAsn4Lys(Me₂)3Arg⁺.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-luctuosa/284_Guanosine_Pl_HDX.pdf",
+      "files": [
+        "content/Small Compounds/Nucleosides & Nucleotides/Guanosine.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-luctuosa/36_Phenylacetamide_Pl_HDX.pdf",
+      "files": [
+        "content/Small Compounds/Others/Phenylacetamide.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-luctuosa/36_Phenylacetamide_Pl.pdf",
+      "files": [
+        "content/Small Compounds/Others/Phenylacetamide.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-luctuosa/360_IndAc334_IndAc343_Pl_HDX.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc334.md",
+        "content/Alkaloids/IndAc/IndAc343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-luctuosa/360_IndAc334_Pl.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc334.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-luctuosa/360_IndAc343_IndAc334_Pl.pdf",
+      "files": [
+        "content/Alkaloids/IndAc/IndAc343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-luctuosa/392_IndAc3(OH)34_Pl_HDX.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)34.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-luctuosa/392_IndAc3(OH)34_Pl.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3(OH)34.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-luctuosa/433_4-OH-IndAc3334_4-OH-IndAc3343_Pl_HDX.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3334.md",
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-luctuosa/433_4-OH-IndAc3334_Pl.pdf",
+      "files": [
+        "content/Alkaloids/4-OH-IndAc/4-OH-IndAc3334.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-luctuosa/452_OH-OMe-Bz3334Gu_Pl_HDX.pdf",
+      "files": [
+        "content/Alkaloids/OH-OMe-Bz/OH-OMe-Bz3334Gu.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-mexicanus/203_PA334_PA343_Pm.pdf",
+      "files": [
+        "content/Alkaloids/Free polyamines (PA)/PA334.md",
+        "content/Alkaloids/Free polyamines (PA)/PA343.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-tristis/134_Aspartic-acid_Pt_HDX.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Aspartic acid.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-tristis/148_Glutamic-acid_Pt_HDX.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid.md"
+      ]
+    },
+    {
+      "reference": "/pdf/P-viridans/154_N-acetylhystamine_Pv.pdf",
+      "files": [
+        "content/Small Compounds/Biogenic amines/N-Acetylhistamine.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Stegodyphus-sp4/104_Choline_St-sp4.pdf",
+      "files": [
+        "content/Small Compounds/Quaternary amines/Choline.md"
+      ]
+    },
+    {
+      "reference": "/pdf/Stegodyphus-sp4/162_Glutamic-acid_5-methylester_St-sp4.pdf",
+      "files": [
+        "content/Small Compounds/Amino acids/Glutamic acid 5-methylester.md"
+      ]
+    }
+  ]
+}

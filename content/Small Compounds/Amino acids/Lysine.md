@@ -1,7 +1,7 @@
 +++
 title = "Lysine"
 categories = ["C6H14N2O2","P147","HDX153",
-"Ctenidae","Cupiennius","Lycosidae","Pholcidae"]
+"Ctenidae","Ctenidae","Lycosidae","Pholcidae"]
 tags = ["S-1","C-1",
 "Cupiennius salei","Lycosa erythrognatha","Lycosa indagatrix","Lycosa sp.","Geolycosa sp.","Phoneutria fera","Physocyclus mexicanus"]
 +++
@@ -67,7 +67,7 @@ tags = ["S-1","C-1",
 
 | Spider species       | Family     | Discovered                 |
 |----------------------|------------|----------------------------|
-| Cupiennius salei     | Cupiennius | 1994 / L. Kuhn-Nentwig     |
+| Cupiennius salei     | Ctenidae   | 1994 / L. Kuhn-Nentwig     |
 | Geolycosa sp. | Lycosidae | 2020 / Y. M. Forster |
 | Lycosa erythrognatha | Lycosidae  | 1957 / F. G. Fischer       |
 | Lycosa indagatrix    | Lycosidae  | 1988 / G. Ridling Margaret |

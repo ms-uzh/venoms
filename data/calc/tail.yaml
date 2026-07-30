@@ -1,0 +1,78 @@
+- Name: '-'
+- Name: ''
+  Formula: ['H2', 'N']
+  Mass: 16.01872406889
+  HDX: 2
+  Quaternary: 0
+- Name: '(NMe)'
+  Formula: ['C1', 'H4', 'N']
+  Mass: 30.03437413335
+  HDX: 1
+  Sub:
+    Name: 'CH2'
+    Mass: 14.01565006446
+  Quaternary: 0
+- Name: '(NMe₂)'
+  Formula: ['C2', 'H6', 'N']
+  Mass: 44.05002419781
+  HDX: 0
+  Sub:
+    Name: 'C2H4'
+    Mass: 28.03130012892
+  Quaternary: 0
+- Name: '(NMe₃)'
+  Formula: ['C3', 'H9', 'N']
+  Mass: 59.07349929450
+  HDX: 0
+  Sub:
+    Name: 'C3H7'
+    Mass: 43.05477522561
+  Quaternary: 1
+- Name: 'Ac'
+  Formula: ['C2', 'H4', 'N', 'O']
+  Mass: 58.02928875292
+  HDX: 1
+  Sub:
+    Name: 'C2H20'
+    Mass: 42.01056468403
+  Quaternary: 0
+- Name: 'Arg'
+  Formula: ['C6', 'H14', 'N5', 'O']
+  Mass: 172.11983509294
+  HDX: 7
+  Sub:
+    Name: 'C6H12N4O'
+    Mass: 156.10111102405
+  Quaternary: 0
+- Name: 'Gu'
+  Formula: ['C1', 'H4', 'N3']
+  Mass: 58.04052214221
+  HDX: 4
+  Sub:
+    Name: 'CH2N2'
+    Mass: 42.02179807332
+  Quaternary: 0
+- Name: 'Lys'
+  Formula: ['C6', 'H14', 'N3', 'O']
+  Mass: 144.11368708408
+  HDX: 5
+  Sub:
+    Name: 'C6H12N2O'
+    Mass: 128.09496301519
+  Quaternary: 0
+- Name: '(2,5-(OH)₂-Bz)'
+  Formula: ['C7', 'H6', 'N', 'O3']
+  Mass: 152.03476805652
+  HDX: 3
+  Sub:
+    Name: 'C7H4O3'
+    Mass: 136.01604398763
+  Quaternary: 0
+- Name: '(4-OH-Bz)'
+  Formula: ['C7', 'H6', 'N', 'O2']
+  Mass: 136.03985343695
+  HDX: 2
+  Sub:
+    Name: 'C7H4O2'
+    Mass: 120.02112936806
+  Quaternary: 0

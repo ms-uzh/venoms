@@ -1,7 +1,7 @@
 +++
 title = "Isoleucine"
 categories = ["C6H13NO2","P132","HDX136",
-"Araneidae","Cupiennius","Lycosidae","Pholcidae","Sparassidae","Theridiidae"]
+"Araneidae","Ctenidae","Lycosidae","Pholcidae","Sparassidae","Theridiidae"]
 tags = ["S-1","C-1",
 "Alopecosa sp.","Cupiennius salei","Geolycosa sp.","Heteropoda davidbowie","Hippocosa sp.","Latrodectus mactans","Lycosa indagatrix","Parawixia bistriata","Physocyclus mexicanus","Steatoda grossa"]
 +++

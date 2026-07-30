@@ -1,0 +1,114 @@
+- Name: '-'
+- Name: '3'
+  Formula: ['C3', 'H7', 'N']
+  Mass: 57.05784923004
+  HDX: 1
+  Quaternary: 0
+- Name: '(Me)3'
+  Formula: ['C4', 'H9', 'N']
+  Mass: 71.07349929450
+  Sub:
+    Name: 'Me'
+    Mass: 14.01565006446
+  HDX: 0
+  Quaternary: 0
+- Name: '(Me₂)3'
+  Formula: ["C5", "H12", "N"]
+  Mass: 86.09697439119
+  Sub:
+    Name: 'C2H5'
+    Mass: 29.03912516115
+  HDX: 0
+  Quaternary: 1
+- Name: '(OH)3'
+  Formula: ['C3', 'H7','N', 'O']
+  Mass: 73.05276384961
+  Sub:
+    Name: 'O'
+    Mass: 15.99491461957
+  HDX: 1
+  Quaternary: 0
+- Name: '4'
+  Formula: ['C4', 'H9', 'N']
+  Mass: 71.07349929450
+  HDX: 1
+  Quaternary: 0
+- Name: '(Me)4'
+  Formula: ['C5', 'H11', 'N']
+  Mass: 85.08914935896
+  Sub:
+    Name: 'Me'
+    Mass: 14.01565006446
+  HDX: 0
+  Quaternary: 0
+- Name: '(Me₂)4'
+  Formula: ["C6", "H14", "N"]
+  Mass: 100.11262445565
+  Sub:
+    Name: 'C2H5'
+    Mass: 29.03912516115
+  HDX: 0
+  Quaternary: 1
+- Name: '(OH)4'
+  Formula: ['C4', 'H9','N', 'O']
+  Mass: 87.06841391407
+  Sub:
+    Name: 'O'
+    Mass: 15.99491461957
+  HDX: 1
+  Quaternary: 0
+- Name: '5'
+  Formula: ['C5', 'H11', 'N']
+  Mass: 85.08914935896
+  HDX: 1
+  Quaternary: 0
+- Name: 'Ala'
+  Formula: ['C3', 'H5', 'N', 'O']
+  Mass: 71.03711378515
+  HDX: 1
+  Quaternary: 0
+- Name: 'ßAla'
+  Formula: ['C3', 'H5', 'N', 'O']
+  Mass: 71.03711378515
+  HDX: 1
+  Quaternary: 0
+- Name: 'Asn'
+  Formula: ['C4', 'H6', 'N2', 'O2']
+  Mass: 114.04292744138
+  HDX: 3
+  Quaternary: 0
+- Name: 'Asp'
+  Formula: ['C4', 'H5', 'N', 'O3']
+  Mass: 115.02694302429
+  HDX: 3
+  Quaternary: 0
+- Name: 'Gln'
+  Formula: ['C5', 'H8', 'N2', 'O2']
+  Mass: 128.05857750584
+  HDX: 3
+  Quaternary: 0
+- Name: 'Gly'
+  Formula: ['C2', 'H3', 'N', 'O']
+  Mass: 57.02146372069
+  HDX: 1
+  Quaternary: 0
+- Name: 'Lys'
+  Formula: ['C6', 'H12', 'N2', 'O1']
+  Mass: 128.09496301519
+  HDX: 3
+  Quaternary: 0
+- Name: 'LysMe'
+  Formula: ['C7', 'H14', 'N2', 'O1']
+  Mass: 142.11061307965
+  HDX: 2
+  Quaternary: 0
+- Name: 'LysMe₂'
+  Formula: ['C8', 'H16', 'N2', 'O1']
+  Mass: 156.12626314411
+  HDX: 1
+  Quaternary: 0
+- Name: 'Orn'
+  Formula: ['C5', 'H10', 'N2', 'O1']
+  Mass: 114.07931295073
+  HDX: 3
+  Quaternary: 0

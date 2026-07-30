@@ -1,7 +1,7 @@
 +++
 title = "Aspartic acid"
 categories = ["C4H7NO4","P134","HDX134",
-"Araneidae","Cupiennius","Ctenidae","Lycosidae","Plectreuridae","Segestriidae","Theraphosidae"]
+"Araneidae","Ctenidae","Ctenidae","Lycosidae","Plectreuridae","Segestriidae","Theraphosidae"]
 tags = ["S-1","C-1",
 "Alopecosa sp.","Ariadna sp.","Aphonopelma californicum","Aphonopelma hentzi","Araneus gemma",
 "Cupiennius salei",
@@ -79,7 +79,7 @@ tags = ["S-1","C-1",
 | Aphonopelma hentzi     | Theraphosidae | 1973 / F. L. Schanbacher |
 | Araneus gemma          | Araneidae     | 1987 / S. L. Early       |
 | Ariadna sp. | Segestriidae | 2020 / Y. M. Forster |
-| Cupiennius salei       | Cupiennius    | 1994 / L. Kuhn-Nentwig   |
+| Cupiennius salei       | Ctenidae      | 1994 / L. Kuhn-Nentwig   |
 | Lycosa erythrognatha   | Lycosidae     | 1957 / F. G. Fischer     |
 | Phoneutria fera        | Ctenidae      | 1957 / F. G. Fischer     |
 | Plectreurys tristis | Plectreuridae | 2020 / Y. M. Forster |

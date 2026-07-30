@@ -1,7 +1,7 @@
 +++
 title = "Citric acid"
 categories = ["C6H8O7","P193","HDX198",
-"Agelenidae","Araneidae","Atracidae","Cupiennius","Lycosidae","Nemesiidae","Palpimanidae","Pisauridae","Salticidae","Segestriidae","Sicariidae","Sparassidae","Theraphosidae","Thomisidae","Titanoecidae","Zodariidae"]
+"Agelenidae","Araneidae","Atracidae","Ctenidae","Lycosidae","Nemesiidae","Palpimanidae","Pisauridae","Salticidae","Segestriidae","Sicariidae","Sparassidae","Theraphosidae","Thomisidae","Titanoecidae","Zodariidae"]
 tags = ["S-1","C-4",
 "Aculepeira sp.","Agelenopsis aperta","Agelenopsis potteri","Aphonopelma hentzi","Aphonopelma seemanni","Aphonopelma sp.","Araneus diadematus","Araneus tartaricus","Ariadna sp.","Atrax robustus",
 "Brachypelma emilia","Brachypelma smithi",
@@ -104,7 +104,7 @@ tags = ["S-1","C-4",
 | Ceratogyrus marshalli (cornuatus)  | Theraphosidae | 2008 / F. C. Schroeder |
 | Chilobrachys sp.                   | Theraphosidae | 2008 / F. C. Schroeder |
 | Coelotes pastoralis                | Agelenidae    | 2008 / F. C. Schroeder |
-| Cupiennius salei                   | Cupiennius    | 2005 / K. Böröczky     |
+| Cupiennius salei                   | Ctenidae      | 2005 / K. Böröczky     |
 | Cyriopagopus albostriatus          | Theraphosidae | 2008 / F. C. Schroeder |
 | Cyriopagopus hainanus              | Theraphosidae | 2008 / F. C. Schroeder |
 | Cyriopagopus lividum               | Theraphosidae | 2008 / F. C. Schroeder |
