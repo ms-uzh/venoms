@@ -72,4 +72,6 @@ Before merging this migration, configure **Settings > Builds** for the `venoms` 
 
 Workers Builds stores these commands in the Cloudflare project rather than `wrangler.jsonc`. The build command validates the app, applies D1 migrations, and seeds an inactive search version. The production deploy command uploads the Worker first and only then promotes that search version. Leaving the default `npx wrangler deploy` command in place would deploy the Worker without activating its new search index.
 
+That misconfiguration is silent — pages render from static assets, so only search goes stale. `npm run check:search-version` compares the built content version against the live `meta.active_version` and fails loudly when they diverge; `npm run verify:deploy` runs the smoke checks against production and then that check. Run either after a production deploy.
+
 `legacy:taxonomy` refreshes the committed legacy-route snapshot from `origin/gh-pages`; normal builds do not depend on that remote branch.

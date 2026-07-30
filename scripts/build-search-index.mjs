@@ -1,17 +1,17 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { normalizeTermKey } from "./lib/terms.mjs";
+import { readFullContentIndex } from "./lib/content.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const indexPath = path.join(root, "public", "data", "content-index.json");
 const outputDir = path.join(root, ".generated");
 const seedFile = path.join(outputDir, "search-seed.sql");
 const versionFile = path.join(outputDir, "search-version.txt");
 const SEARCH_SCHEMA_VERSION = 2;
 
-const { pages } = JSON.parse(await readFile(indexPath, "utf8"));
+const { pages } = await readFullContentIndex(root);
 const ordered = [...pages].sort((a, b) => a.slug.localeCompare(b.slug));
 
 // Content hash — stable across runs (no timestamps), independent of table names.

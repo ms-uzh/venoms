@@ -19,6 +19,8 @@
     "seed:version": "node scripts/seed-version.mjs",
     "deploy:build": "npm run types && npm run prepare:assets && npm run validate && npm test && tsc --noEmit && npm run search:index && npx wrangler d1 migrations apply venoms-search --remote && node scripts/seed-version.mjs --no-promote",
     "deploy:production": "node scripts/deploy-production.mjs",
+    "check:search-version": "node scripts/check-search-version.mjs",
+    "verify:deploy": "SMOKE_BASE_URL=${SMOKE_BASE_URL:-https://venoms.rootd.workers.dev} npm run smoke && npm run check:search-version",
     "deploy:preview": "wrangler versions upload",
     "db:migrate": "wrangler d1 migrations apply venoms-search --local",
     "db:seed": "npm run prepare:assets && npm run search:index && node scripts/seed-version.mjs --local --promote",

@@ -302,7 +302,9 @@ export function fallbackSearch(index: ContentIndex, params: SearchParams): Searc
         if (!inRange(page.precursor1) && !inRange(page.nominalMass)) return false;
       }
       if (!needle) return true;
-      return [page.title, page.description, page.bodyText, page.formula, ...page.categories, ...page.tags, ...page.family, ...page.species]
+      // Body prose is not shipped in the runtime index, so this degraded path (D1
+      // unavailable) matches metadata only: title, description, formula, taxonomy, terms.
+      return [page.title, page.description, page.formula, ...page.categories, ...page.tags, ...page.family, ...page.species]
         .join(" ")
         .toLowerCase()
         .includes(needle);

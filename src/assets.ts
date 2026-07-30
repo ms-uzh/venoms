@@ -19,14 +19,27 @@ export async function fetchJsonAsset<T>(assets: Fetcher, request: Request, pathn
   return JSON.parse(text) as T;
 }
 
-export function loadContentIndex(assets: Fetcher, request: Request): Promise<ContentIndex> {
-  return fetchJsonAsset<ContentIndex>(assets, request, "/data/content-index.json");
+/**
+ * Fetch a JSON asset once per isolate.
+ *
+ * Static assets are immutable for the lifetime of a deployment and a new deploy
+ * gets fresh isolates, so the parsed value can be held indefinitely. The promise
+ * (not the resolved value) is cached so concurrent requests share one fetch; a
+ * rejection clears the slot so a transient failure is not cached forever.
+ */
+function memoizeJsonAsset<T>(pathname: string): (assets: Fetcher, request: Request) => Promise<T> {
+  let pending: Promise<T> | null = null;
+  return (assets, request) => {
+    if (!pending) {
+      pending = fetchJsonAsset<T>(assets, request, pathname).catch((error) => {
+        pending = null;
+        throw error;
+      });
+    }
+    return pending;
+  };
 }
 
-export function loadRedirectIndex(assets: Fetcher, request: Request): Promise<RedirectIndex> {
-  return fetchJsonAsset<RedirectIndex>(assets, request, "/data/redirects.json");
-}
-
-export function loadCalcConfig(assets: Fetcher, request: Request): Promise<CalcConfig> {
-  return fetchJsonAsset<CalcConfig>(assets, request, "/data/calc/config.json");
-}
+export const loadContentIndex = memoizeJsonAsset<ContentIndex>("/data/content-index.json");
+export const loadRedirectIndex = memoizeJsonAsset<RedirectIndex>("/data/redirects.json");
+export const loadCalcConfig = memoizeJsonAsset<CalcConfig>("/data/calc/config.json");

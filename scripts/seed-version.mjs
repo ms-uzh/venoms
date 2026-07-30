@@ -27,8 +27,6 @@ const seedFile = path.join(root, ".generated", "search-seed.sql");
 const now = new Date().toISOString();
 
 const P = `pages_${version}`;
-const Tt = `page_terms_${version}`;
-const F = `pages_fts_${version}`;
 
 function wrangler(args, capture = false) {
   return execFileSync("npx", ["wrangler", ...args], {

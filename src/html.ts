@@ -664,7 +664,23 @@ function isSpiderFamily(value: string): boolean {
   return /idae$/i.test(value);
 }
 
+// The nav model is derived from the whole 582-page index and is rebuilt for every
+// HTML response (twice on the home and browse pages). The content index is memoized
+// per isolate, so keying on the array identity makes this a cache hit after the first
+// render; a different array is simply a different key, so it cannot go stale.
+const navModelCache = new WeakMap<PageIndexEntry[], NavModel>();
+
 export function buildNavModel(pages: PageIndexEntry[]): NavModel {
+  const cached = navModelCache.get(pages);
+  if (cached) {
+    return cached;
+  }
+  const model = computeNavModel(pages);
+  navModelCache.set(pages, model);
+  return model;
+}
+
+function computeNavModel(pages: PageIndexEntry[]): NavModel {
   const subMap = new Map<string, NavSubclass>();
   const familyMap = new Map<string, { count: number; species: Set<string> }>();
 

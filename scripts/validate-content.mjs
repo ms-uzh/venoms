@@ -1,7 +1,7 @@
 import { access, mkdir, readdir, readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { findMarkdownFiles, readMarkdownPage } from "./lib/content.mjs";
+import { findMarkdownFiles, readFullContentIndex, readMarkdownPage } from "./lib/content.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const contentDir = path.join(root, "content");
@@ -56,6 +56,38 @@ async function validateIndex(parsed) {
   const duplicates = findDuplicates(index.pages.map((page) => page.slug));
   for (const duplicate of duplicates) {
     errors.push(`Duplicate slug in generated index: ${duplicate || "(root)"}`);
+  }
+
+  await validateRuntimeIndexParity(index);
+}
+
+// The shipped index is a slimmed copy of .generated/content-index.json; the two must
+// still describe exactly the same pages, and the runtime copy must not carry the
+// build-only fields it exists to omit.
+async function validateRuntimeIndexParity(runtimeIndex) {
+  let fullIndex;
+  try {
+    fullIndex = await readFullContentIndex(root);
+  } catch (error) {
+    errors.push(error.message);
+    return;
+  }
+
+  if (fullIndex.pages.length !== runtimeIndex.pages.length) {
+    errors.push(`Runtime index has ${runtimeIndex.pages.length} pages but the full index has ${fullIndex.pages.length}.`);
+  }
+
+  const fullSlugs = new Set(fullIndex.pages.map((page) => page.slug));
+  for (const page of runtimeIndex.pages) {
+    if (!fullSlugs.has(page.slug)) {
+      errors.push(`Runtime index slug missing from the full index: ${page.slug || "(root)"}`);
+    }
+  }
+
+  for (const field of ["bodyText", "fallbackSlug"]) {
+    if (runtimeIndex.pages.some((page) => page[field] !== undefined)) {
+      errors.push(`Runtime index still ships build-only field "${field}".`);
+    }
   }
 }
 

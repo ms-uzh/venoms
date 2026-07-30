@@ -1,15 +1,15 @@
 import { execFileSync } from "node:child_process";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { normalizeTermKey } from "./lib/terms.mjs";
+import { readFullContentIndex } from "./lib/content.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ref = process.env.LEGACY_SITE_REF || "origin/gh-pages";
-const contentIndexPath = path.join(root, "public", "data", "content-index.json");
 const outputFile = path.join(root, "data", "legacy-taxonomy.json");
 
-const { pages } = JSON.parse(await readFile(contentIndexPath, "utf8"));
+const { pages } = await readFullContentIndex(root);
 const termsByType = {
   categories: new Set(pages.flatMap((page) => page.categories).map(normalizeTermKey)),
   tags: new Set(pages.flatMap((page) => page.tags).map(normalizeTermKey)),

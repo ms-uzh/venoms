@@ -25,17 +25,30 @@ if (duplicates.length > 0) {
   throw new Error(`Duplicate slugs: ${duplicates.join(", ")}`);
 }
 
-const payload = {
-  generatedAt: new Date().toISOString(),
-  pages,
+const generatedAt = new Date().toISOString();
+
+// Two outputs from one parse:
+// - .generated/content-index.json keeps every field and is the build-time source of
+//   truth (search seed needs bodyText, redirects need fallbackSlug).
+// - public/data/content-index.json ships to the Worker, so it drops the build-only
+//   fields — bodyText alone is ~73% of the payload, and the Worker parses this file
+//   on the first request of every isolate.
+const BUILD_ONLY_FIELDS = ["bodyText", "fallbackSlug"];
+
+const payload = { generatedAt, pages };
+const runtimePayload = {
+  generatedAt,
+  pages: pages.map((page) => Object.fromEntries(
+    Object.entries(page).filter(([key]) => !BUILD_ONLY_FIELDS.includes(key)),
+  )),
 };
 
 await mkdir(outputDir, { recursive: true });
 await mkdir(generatedDir, { recursive: true });
-await writeFile(outputFile, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+await writeFile(outputFile, `${JSON.stringify(runtimePayload, null, 2)}\n`, "utf8");
 await writeFile(generatedFile, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
 
-console.log(`Indexed ${pages.length} Markdown pages into ${path.relative(root, outputFile)}`);
+console.log(`Indexed ${pages.length} Markdown pages into ${path.relative(root, outputFile)} (runtime) and ${path.relative(root, generatedFile)} (full)`);
 
 function loadOldSlugByTitle() {
   try {

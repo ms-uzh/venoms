@@ -1,12 +1,12 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { readFullContentIndex } from "./lib/content.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const contentIndexPath = path.join(root, "public", "data", "content-index.json");
 const outputFile = path.join(root, "public", "data", "suggest.json");
 
-const { pages } = JSON.parse(await readFile(contentIndexPath, "utf8"));
+const { pages } = await readFullContentIndex(root);
 
 // Lightweight type-ahead index: only the fields the omnibox matches/renders,
 // with short keys to keep the payload small (loaded once, client-side).

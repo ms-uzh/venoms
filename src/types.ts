@@ -1,13 +1,16 @@
+/**
+ * A page as shipped in the runtime index (public/data/content-index.json).
+ * Build-only fields (bodyText, fallbackSlug) are stripped from that payload and
+ * live in .generated/content-index.json instead — see scripts/build-content-index.mjs.
+ */
 export type PageIndexEntry = {
   slug: string;
-  fallbackSlug: string;
   sourcePath: string;
   title: string;
   kind: "compound" | "guide";
   description: string;
   categories: string[];
   tags: string[];
-  bodyText: string;
   formula: string;
   nominalMass: number | null;
   precursor1: number | null;

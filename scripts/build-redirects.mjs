@@ -2,14 +2,14 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { normalizeTermKey } from "./lib/terms.mjs";
+import { readFullContentIndex } from "./lib/content.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const contentIndexPath = path.join(root, "public", "data", "content-index.json");
 const legacyTaxonomyPath = path.join(root, "data", "legacy-taxonomy.json");
 const outputFile = path.join(root, "public", "data", "redirects.json");
 const generatedFile = path.join(root, ".generated", "redirects.json");
 
-const { pages } = JSON.parse(await readFile(contentIndexPath, "utf8"));
+const { pages } = await readFullContentIndex(root);
 const { routes: legacyTaxonomyRoutes } = JSON.parse(await readFile(legacyTaxonomyPath, "utf8"));
 const termsByType = {
   categories: new Set(pages.flatMap((page) => page.categories).map(normalizeTermKey)),

@@ -3,6 +3,24 @@ import path from "node:path";
 import { parse as parseToml } from "smol-toml";
 import { fallbackSlugFromSourcePath } from "./slugs.mjs";
 
+/**
+ * Read the full content index written by scripts/build-content-index.mjs.
+ *
+ * Build steps must use this rather than public/data/content-index.json: the public
+ * copy is the slimmed runtime payload and omits build-only fields (bodyText,
+ * fallbackSlug). `prepare:assets` runs content:index first, so the file exists.
+ */
+export async function readFullContentIndex(root) {
+  const fullIndexPath = path.join(root, ".generated", "content-index.json");
+  try {
+    return JSON.parse(await readFile(fullIndexPath, "utf8"));
+  } catch (error) {
+    throw new Error(
+      `Cannot read ${path.relative(root, fullIndexPath)} (${error.message}). Run "npm run content:index" first.`,
+    );
+  }
+}
+
 export async function findMarkdownFiles(contentDir) {
   const entries = await readdir(contentDir, { withFileTypes: true });
   const result = [];
